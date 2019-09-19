@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "name": "Yael",
+      "location": "Austin, TX",
+      "favoriteColor": "Crimson Red",
+      "id": 5
+    },
+    {
+      "name": "Yael",
+      "location": "Austin, TX",
+      "favoriteColor": "Magenta",
+      "id": 8
+    },
+    {
+      "name": "Yael",
+      "location": "Dallas, TX",
+      "favoriteColor": "Purple",
+      "id": 9
+    },
+    {
+      "name": "cookies",
+      "location": "ginger, bd",
+      "favoriteColor": "brown",
+      "id": 10
+    }
+  ]
+}
