@@ -1,7 +1,3 @@
-/*body {*/
-/*    background: #6AA833;*/
-/*}*/
-
 header {
     background: #6AA833;
     height: 100px;
@@ -11,7 +7,7 @@ header {
 .profile-pic {
     height: 125px;
     width: 125px;
-    border: solid #4A7526 5px;
+    border: solid #4A7526 3px;
     border-radius: 250px;
     position: relative;
     top: 25px;
@@ -28,12 +24,31 @@ header {
 .badge-bar {
     display: flex;
     justify-content: center;
-    border: solid #4A7526 5px;
+    border: solid #4A7526 3px;
     border-radius: 5px;
     min-height: 25px;
 }
 
 .content-areas {
-    border: solid #4A7526 5px;
+    border: solid #4A7526 3px;
     border-radius: 5px;
+}
+
+.friends-heading {
+    background: #6AA833;
+    color: #E8E8E8;
+    text-align: center;
+}
+
+.friend-bar {
+    display: flex;
+    color: #4A7526;
+    align-items: center;
+}
+
+.friend-pic {
+    height: 75px;
+    width: 75px;
+    border: solid #4A7526 3px;
+    border-radius: 250px;
 }

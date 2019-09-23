@@ -1,8 +1,10 @@
 "use strict";
 
 {
-    // Hard-coded variable for username
+    // Hard-coded variables for usernames
     const username = "cadenajohn85";
+    const friend1 = "yaelBrown";
+    const friend2 = "BranceA";
 
     const displayProfile = someUsername => {
         return fetch(`https://api.github.com/users/${someUsername}/events/public`, {headers: {'Authorization': `token ${gitHubKey}`}})
@@ -59,23 +61,6 @@
                     if (badgeImage !== "") {
                         $("#badge-bar").html(`<img style='width:50px;height:50px' src='${badgeImage}' alt="${badgeAltText}" title="${badgeAltText}">`);
                     }
-
-
-                    let html = `<div>`;
-                    html += `<p>Today is: ${todayMonth}-${todayDate}-${todayYear}</p>`;
-                    html += `<p>Last push on: ${lastCommitMonth}-${lastCommitDate}-${lastCommitYear}</p>`;
-                    if (badgeImage !== "") {
-                        html += `<img style='width:100px;height:100px' src='${badgeImage}'>`;
-                    }
-                    html += `<ul>`;
-                    html += `<li>Green star = pushed today`;
-                    html += `<li>Dark blue star = pushed this month`;
-                    html += `<li>Light blue star = pushed in the last 90 days`;
-                    html += `</ul>`;
-                    html += `</div>`;
-                    $("#root").html(html);
-
-                    return data;
                 }
             })
             .catch(error => {
@@ -84,7 +69,37 @@
             });
     };
 
+    // Commented-out code is for testing non-functioning Promise.all
+    const displayFriends = () => {
+        const fetchURL1 = `https://api.github.com/users/${friend1}/events/public`;
+        // const fetchURL2 = `https://api.github.com/users/${friend2}/events/public`;
+        const promise1 = fetch(fetchURL1, {headers: {'Authorization': `token ${gitHubKey}`}});
+        // const promise2 = fetch(fetchURL2, {headers: {'Authorization': `token ${gitHubKey}`}});
+        return promise1
+        // return Promise.all([promise1, promise2])
+            .then(response => response.json())
+            .then(data => {
+                if (data[0] === undefined) {
+                    // $("#profile-pic").html(`<img class="profile-pic" style="background:#4A7526">`);
+                    // $("#username-banner").html("");
+                    //$("main").html("User has not pushed in last 90 days -- information currently unavailable.");
+                } else {
+                    //Display Friend in Friends Bar
+                    const friendUsername = data[0].actor.display_login;
+                    const friendProfileImage = data[0].actor.avatar_url;
+                    $("#friend-pic").html(`<img class="friend-pic mx-2 my-2" src='${friendProfileImage}'>`);
+                    $("#friend-name").html(`<h4>${friendUsername}</h4>`);
+                }
+            })
+            .catch(error => {
+                alert('Oh no! Something went wrong.\nCheck the console for details.');
+                console.log(error);
+            });
+
+};
+
     displayProfile(username);
+    displayFriends();
 
 
 }
