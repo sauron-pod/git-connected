@@ -13,9 +13,10 @@
             })
             .then(data => {
                 if (data[0] === undefined) {
-                    $("#profile-pic").html(`<img class="profile-pic" style="background:#4A7526">`);
+                    // $("#profile-pic").html(`<img class="profile-pic" style="background:#4A7526">`);
+                    $("#profile-pic").css("display", "none");
                     $("#username-banner").html("");
-                    //$("main").html("User has not pushed in last 90 days -- information currently unavailable.");
+                    $("main").html("User has not pushed in last 90 days -- information currently unavailable.");
                 } else {
                     //Display Profile Image
                     const profileImage = data[0].actor.avatar_url;
@@ -79,17 +80,15 @@
         // return Promise.all([promise1, promise2])
             .then(response => response.json())
             .then(data => {
-                if (data[0] === undefined) {
-                    // $("#profile-pic").html(`<img class="profile-pic" style="background:#4A7526">`);
-                    // $("#username-banner").html("");
-                    //$("main").html("User has not pushed in last 90 days -- information currently unavailable.");
-                } else {
+                // if (data[0] === undefined) {
+                //
+                // } else {
                     //Display Friend in Friends Bar
                     const friendUsername = data[0].actor.display_login;
                     const friendProfileImage = data[0].actor.avatar_url;
-                    $("#friend-pic").html(`<img class="friend-pic mx-2 my-2" src='${friendProfileImage}'>`);
+                    $("#friend-pic").html(`<img class="friend-pic my-2" src='${friendProfileImage}'>`);
                     $("#friend-name").html(`<h4>${friendUsername}</h4>`);
-                }
+                // }
             })
             .catch(error => {
                 alert('Oh no! Something went wrong.\nCheck the console for details.');
