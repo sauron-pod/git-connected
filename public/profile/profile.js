@@ -2,7 +2,7 @@
 
 {
     // Hard-coded variables for usernames
-    const username = "cadenajohn85";
+    const username = "AaronBoehle";
     const friend1 = "yaelBrown";
     const friend2 = "BranceA";
 
@@ -73,23 +73,27 @@
     // Commented-out code is for testing non-functioning Promise.all
     const displayFriends = () => {
         const fetchURL1 = `https://api.github.com/users/${friend1}/events/public`;
-        // const fetchURL2 = `https://api.github.com/users/${friend2}/events/public`;
+        const fetchURL2 = `https://api.github.com/users/${friend2}/events/public`;
         const promise1 = fetch(fetchURL1, {headers: {'Authorization': `token ${gitHubKey}`}});
-        // const promise2 = fetch(fetchURL2, {headers: {'Authorization': `token ${gitHubKey}`}});
+        const promise2 = fetch(fetchURL2, {headers: {'Authorization': `token ${gitHubKey}`}});
         return promise1
         // return Promise.all([promise1, promise2])
-            .then(response => response.json())
-            .then(data => {
-                // if (data[0] === undefined) {
-                //
-                // } else {
-                    //Display Friend in Friends Bar
-                    const friendUsername = data[0].actor.display_login;
-                    const friendProfileImage = data[0].actor.avatar_url;
-                    $("#friend-pic").html(`<img class="friend-pic my-2" src='${friendProfileImage}'>`);
-                    $("#friend-name").html(`<h4>${friendUsername}</h4>`);
-                // }
-            })
+        //     .then(data => data.map(friend => {
+        //         console.log(friend);
+        //     }))
+            // .then(result => console.log(result))
+            // .then(response => response.json())
+            // .then(data => {
+            //     // if (data[0] === undefined) {
+            //     //
+            //     // } else {
+            //         //Display Friend in Friends Bar
+            //         const friendUsername = data[0].actor.display_login;
+            //         const friendProfileImage = data[0].actor.avatar_url;
+            //         $("#friend-pic").html(`<img class="friend-pic my-2" src='${friendProfileImage}'>`);
+            //         $("#friend-name").html(`<h4>${friendUsername}</h4>`);
+            //     // }
+            // })
             .catch(error => {
                 alert('Oh no! Something went wrong.\nCheck the console for details.');
                 console.log(error);
