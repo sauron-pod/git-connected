@@ -5,8 +5,9 @@ $("#submit-signup").click(function () {
     let githubName = $("#github-name-input").val();
     console.log(githubName);
 
-    fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
+    fetch(`https://api.github.com/users/${githubName}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
         return response.json().then(response => {
+            console.log(response);
             if (response.id !== undefined) {
                 if ($("#password-input-one").val() === $("#password-input-two").val()) {
                     newUser.password = $("#password-input-one").val();

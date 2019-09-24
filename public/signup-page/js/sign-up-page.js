@@ -24,7 +24,7 @@ $("#submit-signup").click(function () {
                     $("#github-name-input").val("");
                     alert("Passwords do not match");
                 }
-            } else {
+            } else if (response.id === undefined){
                 alert("Please enter your Github username");
             }
         })

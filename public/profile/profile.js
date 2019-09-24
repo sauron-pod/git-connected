@@ -97,8 +97,50 @@
 
 };
 
+    const displayRepos = someUsername => {
+        return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                data.forEach(repo => {
+                    $("#repo-links").append(`<a href="${repo.html_url}" target="_blank">${repo.name}</a><br>`);
+                })
+            })
+            .catch(error => {
+                alert('Oh no! Something went wrong.\nCheck the console for details.');
+                console.log(error);
+            });
+    };
+
+    const findLanguages = someUsername => {
+        return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(repo => {
+                    fetch(repo.languages_url).then(response => {
+                        return response.json();
+                    }).then(data => {
+                        let languages = Object.keys(data);
+                        languages.forEach(language => {
+                            console.log(language);
+                        })
+                    })
+                })
+            })
+            .catch(error => {
+                alert('Oh no! Something went wrong.\nCheck the console for details.');
+                console.log(error);
+            });
+    };
+
     displayProfile(username);
     displayFriends();
+    displayRepos(username);
+    findLanguages(username);
 
 
 }
