@@ -1,10 +1,30 @@
 "use strict";
 
 {
-    // Hard-coded variables for usernames
-    const username = "cadenajohn85";
+
+    //Session storage is pulling the username from the loginpage
+    const thisUser = sessionStorage.getItem("username");
+    let githubUsername;
     const friend1 = "yaelBrown";
     const friend2 = "BranceA";
+
+    //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
+    fetch("../../db.json").then(data => {
+        return data.json();
+    }).then(data => {
+        let users = data.users;
+
+        users.forEach(user => {
+            if (user.username === thisUser) {
+                githubUsername = user.githubname;
+            }
+        });
+    }).then(function () {
+        displayProfile(githubUsername);
+        displayFriends();
+        displayRepos(githubUsername);
+        findLanguages(githubUsername);
+    });
 
     const displayProfile = someUsername => {
         return fetch(`https://api.github.com/users/${someUsername}/events/public`, {headers: {'Authorization': `token ${gitHubKey}`}})
@@ -96,7 +116,7 @@
             });
 
 };
-
+    //This takes the user's repos and appends links to said repos on the page
     const displayRepos = someUsername => {
         return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
             .then(response => {
@@ -113,6 +133,8 @@
                 console.log(error);
             });
     };
+
+    //This bit takes user's github repos and console logs all the languages they have ever used. No real functionality yet but we can access the languages.
 
     const findLanguages = someUsername => {
         return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
@@ -137,10 +159,5 @@
             });
     };
 
-    displayProfile(username);
-    displayFriends();
-    displayRepos(username);
-    findLanguages(username);
 
-
-}
+};
