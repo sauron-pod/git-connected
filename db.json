@@ -4,6 +4,7 @@
       "username": "brunch",
       "name": "Brance",
       "password": "abc123",
+      "githubname": "BranceA",
       "location": "Austin, TX",
       "favoriteColor": "Crimson Red",
       "id": 5
@@ -12,6 +13,7 @@
       "username": "oldyaeler",
       "name": "Yael",
       "password": "def456",
+      "githubname": "yaelBrown",
       "location": "Austin, TX",
       "favoriteColor": "Magenta",
       "id": 8
@@ -20,6 +22,7 @@
       "username": "lemonfreejohn",
       "name": "John",
       "password": "ghi789",
+      "githubname": "cadenajohn85",
       "location": "Dallas, TX",
       "favoriteColor": "Purple",
       "id": 9
@@ -28,6 +31,7 @@
       "username": "test",
       "name": "cookies",
       "password": "abc123",
+      "githubname": "notavailable",
       "location": "ginger, bd",
       "favoriteColor": "brown",
       "id": 10
