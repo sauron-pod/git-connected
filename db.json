@@ -1,25 +1,33 @@
 {
   "users": [
     {
-      "name": "Yael",
+      "username": "brunch",
+      "name": "Brance",
+      "password": "abc123",
       "location": "Austin, TX",
       "favoriteColor": "Crimson Red",
       "id": 5
     },
     {
+      "username": "oldyaeler",
       "name": "Yael",
+      "password": "def456",
       "location": "Austin, TX",
       "favoriteColor": "Magenta",
       "id": 8
     },
     {
-      "name": "Yael",
+      "username": "lemonfreejohn",
+      "name": "John",
+      "password": "ghi789",
       "location": "Dallas, TX",
       "favoriteColor": "Purple",
       "id": 9
     },
     {
+      "username": "test",
       "name": "cookies",
+      "password": "abc123",
       "location": "ginger, bd",
       "favoriteColor": "brown",
       "id": 10
