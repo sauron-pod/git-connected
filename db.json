@@ -23,6 +23,12 @@
       "location": "ginger, bd",
       "favoriteColor": "brown",
       "id": 10
+    },
+    {
+      "name": "Justin",
+      "location": "San Antonio, TX",
+      "favoriteColor": "Green",
+      "id": 11
     }
   ]
 }
