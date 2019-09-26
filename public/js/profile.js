@@ -1,4 +1,10 @@
 "use strict";
+// const keys = require('./keys')
+// import keys from './keys'
+
+// require('dotenv').config()
+const key = process.env.GITHUB_KEY 
+console.log("KEY:  ", key)
 
 // Define verbose mode
 let verbose = true;
@@ -33,7 +39,7 @@ fetch("../db.json").then(data => {
 });
 
 const displayProfile = someUsername => {
-    return fetch(`https://api.github.com/users/${someUsername}/events/public`, {headers: {'Authorization': `token ${gitHubKey}`}})
+    return fetch(`https://api.github.com/users/${someUsername}/events/public`, {headers: {'Authorization': `token ${keys}`}})
         .then(response => {
             return response.json();
         })
@@ -100,7 +106,7 @@ const displayProfile = someUsername => {
 const displayFriends = () => {
     const fetchURL1 = `https://api.github.com/users/${friend1}/events/public`;
     // const fetchURL2 = `https://api.github.com/users/${friend2}/events/public`;
-    const promise1 = fetch(fetchURL1, {headers: {'Authorization': `token ${gitHubKey}`}});
+    const promise1 = fetch(fetchURL1, {headers: {'Authorization': `token ${keys}`}});
     // const promise2 = fetch(fetchURL2, {headers: {'Authorization': `token ${gitHubKey}`}});
     return promise1
     // return Promise.all([promise1, promise2])
@@ -124,7 +130,7 @@ const displayFriends = () => {
 };
 //This takes the user's repos and appends links to said repos on the page
 const displayRepos = someUsername => {
-    return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
+    return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${keys}`}})
         .then(response => {
             return response.json();
         })
@@ -143,7 +149,7 @@ const displayRepos = someUsername => {
 //This bit takes user's github repos and console logs all the languages they have ever used. No real functionality yet but we can access the languages.
 
 const findLanguages = someUsername => {
-    return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
+    return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${keys}`}})
         .then(response => {
             return response.json();
         })
