@@ -10,6 +10,7 @@ const router = jsonServer.router('db.json');
 
 
 server.use('/api', router);
+server.use('/users', (req, res) => res.sendFile(path.join(__dirname, 'db.json')));
 
 
 // app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
