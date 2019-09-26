@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
+    
+    <!-- custom css -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/signup.css">
+
     <title>Sign up</title>
-</head>
-<body>
+  </head>
+  <body>
+    
+    <div class="wrapper">
+        
+      <div class="signup">
+        <h1>Sign up page</h1>
+        <h5>Enter your Username. This will be displayed to other people on Gitconnected.</h5>
+        <input type="text" placeholder="Username" id="username-input">
+        <input type="password" placeholder="password" id="password-input-one">
+        <input type="password" placeholder="password" id="password-input-two">
+        <input type="text" placeholder="Github Name" id="github-name-input">
+        <button id="submit-signup"></button>
+      </div>
+      
+      <!-- Required scripts -->
+      <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+      <script src="/js/keys.js"></script>
+      <script src="/js/signup.js"></script>
+    </div>
 
-<h1>Sign up page</h1>
-
-
-<h5>Enter your Username. This will be displayed to other people on Gitconnected.</h5>
-<input type="text" placeholder="Username" id="username-input">
-<input type="password" placeholder="password" id="password-input-one">
-<input type="password" placeholder="password" id="password-input-two">
-<input type="text" placeholder="Github Name" id="github-name-input">
-<button id="submit-signup"></button>
-
-
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-<script src="../../js/keys.js"></script>
-<script src="./js/sign-up-page.js"></script>
-</body>
+  </body>
 </html>
