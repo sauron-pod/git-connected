@@ -4,5 +4,4 @@ out/*
 *.class
 .DS_Store
 node_modules
-keys.js
 api-keys.js
