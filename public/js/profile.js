@@ -2,7 +2,7 @@
 // const keys = require('./keys')
 // import keys from './keys'
 
-// require('dotenv').config()
+require('dotenv').config()
 const key = process.env.GITHUB_KEY 
 console.log("KEY:  ", key)
 
