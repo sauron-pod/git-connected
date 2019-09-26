@@ -2,7 +2,7 @@
 
 {
     // Hard-coded variables for usernames
-    const username = "AaronBoehle";
+    const username = "cadenajohn85";
     const friend1 = "yaelBrown";
     const friend2 = "BranceA";
 
@@ -70,36 +70,31 @@
             });
     };
 
-    // Commented-out code is for testing non-functioning Promise.all
     const displayFriends = () => {
         const fetchURL1 = `https://api.github.com/users/${friend1}/events/public`;
         const fetchURL2 = `https://api.github.com/users/${friend2}/events/public`;
-        const promise1 = fetch(fetchURL1, {headers: {'Authorization': `token ${gitHubKey}`}});
-        const promise2 = fetch(fetchURL2, {headers: {'Authorization': `token ${gitHubKey}`}});
-        return promise1
-        // return Promise.all([promise1, promise2])
-        //     .then(data => data.map(friend => {
-        //         console.log(friend);
-        //     }))
-            // .then(result => console.log(result))
-            // .then(response => response.json())
-            // .then(data => {
-            //     // if (data[0] === undefined) {
-            //     //
-            //     // } else {
-            //         //Display Friend in Friends Bar
-            //         const friendUsername = data[0].actor.display_login;
-            //         const friendProfileImage = data[0].actor.avatar_url;
-            //         $("#friend-pic").html(`<img class="friend-pic my-2" src='${friendProfileImage}'>`);
-            //         $("#friend-name").html(`<h4>${friendUsername}</h4>`);
-            //     // }
-            // })
+        const promise1 = fetch(fetchURL1, {headers: {'Authorization': `token ${gitHubKey}`}})
+            .then(response => response.json());
+        const promise2 = fetch(fetchURL2, {headers: {'Authorization': `token ${gitHubKey}`}})
+            .then(response => response.json());
+        return Promise.all([promise1, promise2])
+            .then(data => data.forEach(friend => {
+                console.log(friend);
+                const friendUsername = friend[0].actor.display_login;
+                const friendProfileImage = friend[0].actor.avatar_url;
+                let dynamicHTML =
+                    `<div id="friend-bar" class="content-bar">
+                        <div class="mx-2"><img class="content-pic my-2" src='${friendProfileImage}'></div>
+                        <div class="mx-2"><h4>${friendUsername}</h4></div>    
+                    </div>`;
+                $("#friend-display").append(dynamicHTML);
+            }))
             .catch(error => {
                 alert('Oh no! Something went wrong.\nCheck the console for details.');
                 console.log(error);
             });
 
-};
+    };
 
     const displayRepos = someUsername => {
         return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
@@ -107,9 +102,9 @@
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 data.forEach(repo => {
-                    $("#repo-links").append(`<a href="${repo.html_url}" target="_blank">${repo.name}</a><br>`);
+                    $("#repo-links").append(`<h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>`);
                 })
             })
             .catch(error => {
@@ -130,7 +125,7 @@
                     }).then(data => {
                         let languages = Object.keys(data);
                         languages.forEach(language => {
-                            console.log(language);
+                            // console.log(language);
                         })
                     })
                 })
