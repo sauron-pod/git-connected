@@ -195,10 +195,4 @@
 
     };
 
-    displayProfile(username);
-    displayFriends();
-    displayRepos(username);
-    displayLanguages(username);
-
-
 };
