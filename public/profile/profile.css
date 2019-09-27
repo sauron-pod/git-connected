@@ -46,6 +46,10 @@ header {
     align-items: center;
 }
 
+.content-areas a {
+    color: #4A7526;
+}
+
 .content-pic {
     height: 75px;
     width: 75px;

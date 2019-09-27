@@ -79,13 +79,13 @@
             .then(response => response.json());
         return Promise.all([promise1, promise2])
             .then(data => data.forEach(friend => {
-                console.log(friend);
+                // console.log(friend);
                 const friendUsername = friend[0].actor.display_login;
                 const friendProfileImage = friend[0].actor.avatar_url;
                 let dynamicHTML =
                     `<div id="friend-bar" class="content-bar">
                         <div class="mx-2"><img class="content-pic my-2" src='${friendProfileImage}'></div>
-                        <div class="mx-2"><h4>${friendUsername}</h4></div>    
+                        <div class="mx-2"><h4><a href="http://github.com/${friendUsername}">${friendUsername}</a></h4></div>    
                     </div>`;
                 $("#friend-display").append(dynamicHTML);
             }))
@@ -104,7 +104,7 @@
             .then(data => {
                 // console.log(data);
                 data.forEach(repo => {
-                    $("#repo-links").append(`<h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>`);
+                    $("#repo-links").append(`<div class="mx-2"><h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4></div>`);
                 })
             })
             .catch(error => {
@@ -119,16 +119,24 @@
                 return response.json();
             })
             .then(data => {
+                // console.log(data);
+                const allLangArrays = [];
                 data.forEach(repo => {
-                    fetch(repo.languages_url).then(response => {
+                    fetch(repo.languages_url)
+                        .then(response => {
                         return response.json();
-                    }).then(data => {
-                        let languages = Object.keys(data);
-                        languages.forEach(language => {
-                            // console.log(language);
-                        })
                     })
-                })
+                        .then(data => {
+                        let languages = Object.keys(data);
+                        console.log(languages);
+                        for(const language of languages) {
+                            if (allLangArrays.indexOf(language) === -1) {
+                                allLangArrays.push(language); // Somehow this line makes it work... WHY?!?!?
+                                $("#lang-list").append(`<h4>${language}</h4>`);
+                            }
+                        }
+                    })
+                });
             })
             .catch(error => {
                 alert('Oh no! Something went wrong.\nCheck the console for details.');
