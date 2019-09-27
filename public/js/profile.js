@@ -1,10 +1,10 @@
 "use strict";
+
 // const keys = require('./keys')
 // import keys from './keys'
-
-require('dotenv').config()
-const key = process.env.GITHUB_KEY 
-console.log("KEY:  ", key)
+// require('dotenv').config()
+// const key = process.env.GITHUB_KEY 
+// console.log("KEY:  ", key)
 
 // Define verbose mode
 let verbose = true;
@@ -130,7 +130,7 @@ const displayFriends = () => {
 };
 //This takes the user's repos and appends links to said repos on the page
 const displayRepos = someUsername => {
-    return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${keys}`}})
+    return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
         .then(response => {
             return response.json();
         })
@@ -149,7 +149,7 @@ const displayRepos = someUsername => {
 //This bit takes user's github repos and console logs all the languages they have ever used. No real functionality yet but we can access the languages.
 
 const findLanguages = someUsername => {
-    return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${keys}`}})
+    return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
         .then(response => {
             return response.json();
         })
