@@ -113,7 +113,7 @@
             });
     };
 
-    const findLanguages = someUsername => {
+    const displayLanguages = someUsername => {
         return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
             .then(response => {
                 return response.json();
@@ -131,13 +131,15 @@
                         console.log(languages);
                         for(const language of languages) {
                             if (allLangArrays.indexOf(language) === -1) {
-                                allLangArrays.push(language); // Somehow this line makes it work... WHY?!?!?
+                                allLangArrays.push(language); // Somehow this line makes only unique langs display... WHY?!?!?
                                 $("#lang-list").append(`<div class="mx-2"><h4>${language}</h4></div>`);
+                                // displayLanguagesBadge(allLangArrays.length); // Displays badges for unique array lengths
                             }
                         }
                         // console.log(allLangArrays.length); // Here, length is the length of the current repo's langs
+                        displayLanguagesBadge(allLangArrays.length); // Displays a badge based on count for all repos
                     });
-                    console.log(allLangArrays.length);  // Here, length is 0 every time.
+                    // console.log(allLangArrays.length);  // Here, length is 0 every time.
                 });
             })
             .catch(error => {
@@ -146,10 +148,33 @@
             });
     };
 
+    const displayLanguagesBadge = (numberOfLanguages) => {
+        let badgeImage = "";
+        let badgeAltText = "";
+        if (numberOfLanguages >= 2 && numberOfLanguages < 4) {
+            badgeImage = "langs1.png";
+            badgeAltText = "Bilingual: Codes in at least 2 different languages";
+        }
+        if (numberOfLanguages >= 4 && numberOfLanguages < 8) {
+            badgeImage = "langs2.png";
+            badgeAltText = "Multilingual: Codes in at least 4 different languages";
+        }
+        if (numberOfLanguages >= 8) {
+            badgeImage = "langs3.png";
+            badgeAltText = "Polyglot: Codes in at least 8 different languages";
+        }
+
+        // Display badge
+        if (badgeImage !== "") {
+            $("#badge-bar").append(`<img style='width:50px;height:50px' src='img/${badgeImage}' alt="${badgeAltText}" title="${badgeAltText}">`);
+        }
+
+    };
+
     displayProfile(username);
     displayFriends();
     displayRepos(username);
-    findLanguages(username);
+    displayLanguages(username);
 
 
 }
