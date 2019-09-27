@@ -16,7 +16,7 @@
 
         users.forEach(user => {
             if (user.username === thisUser) {
-                githubUsername = user.githubname;
+                githubUsername = user.githubName;
             }
         });
     }).then(function () {
