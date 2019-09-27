@@ -132,10 +132,12 @@
                         for(const language of languages) {
                             if (allLangArrays.indexOf(language) === -1) {
                                 allLangArrays.push(language); // Somehow this line makes it work... WHY?!?!?
-                                $("#lang-list").append(`<h4>${language}</h4>`);
+                                $("#lang-list").append(`<div class="mx-2"><h4>${language}</h4></div>`);
                             }
                         }
-                    })
+                        // console.log(allLangArrays.length); // Here, length is the length of the current repo's langs
+                    });
+                    console.log(allLangArrays.length);  // Here, length is 0 every time.
                 });
             })
             .catch(error => {
