@@ -1,28 +1,44 @@
 {
   "users": [
     {
-      "name": "Yael",
-      "location": "Austin, TX",
-      "favoriteColor": "Crimson Red",
+      "username": "brunch",
+      "firstName": "Brance",
+      "lastName": "Alexander",
+      "password": "abc123",
+      "githubName": "BranceA",
       "id": 5
     },
     {
-      "name": "Yael",
-      "location": "Austin, TX",
-      "favoriteColor": "Magenta",
+      "username": "oldyaeler",
+      "firstName": "Yael",
+      "lastName": "Brown",
+      "password": "def456",
+      "githubName": "yaelBrown",
       "id": 8
     },
     {
-      "name": "Yael",
-      "location": "Dallas, TX",
-      "favoriteColor": "Purple",
+      "username": "lemonfreejohn",
+      "firstName": "John",
+      "lastName": "Cadena",
+      "password": "ghi789",
+      "githubName": "cadenajohn85",
       "id": 9
     },
     {
-      "name": "cookies",
-      "location": "ginger, bd",
-      "favoriteColor": "brown",
+      "username": "test",
+      "firstName": "cookies",
+      "lastName": "n'cream",
+      "password": "jkl000",
+      "githubName": "notavailable",
       "id": 10
+    },
+    {
+      "username": "KEVIN!!!",
+      "firstName": "Kevin",
+      "lastName": "Arnall",
+      "githubName": "KevinArnall",
+      "password": "badpw",
+      "id": 11
     }
   ]
 }
