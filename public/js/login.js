@@ -12,7 +12,7 @@ $("#login-button").click(function () {
     let passwordInput = $("#password").val();
     $("#password").val("");
 
-    This fetches from our database and checks if the username matches the password
+    //This fetches from our database and checks if the username matches the password
     fetch("http://localhost:3000/users", {
         mode: 'no-cors',
         method: 'GET',
