@@ -12,10 +12,14 @@ $("#login-button").click(function () {
     let passwordInput = $("#password").val();
     $("#password").val("");
 
-    //This fetches from our database and checks if the username matches the password
-    fetch("../db").then(data => {
-        return data.json();
-    }).then(data => {
+    This fetches from our database and checks if the username matches the password
+    fetch("http://localhost:3000/users", {
+        mode: 'no-cors',
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(data => data.json()).then(data => {
         users = data.users;
         (verbose) ? console.log(users) : "";
         users.forEach(user => {
@@ -27,7 +31,5 @@ $("#login-button").click(function () {
                 document.location.href = "profile.html";
             }
         })
-    }).catch((error) => {
-        (verbose) ? console.log("fetch failed " + error) : "";
-    })
+    }).catch((error) => (verbose) ? console.log("fetch failed " + error) : "")
 });

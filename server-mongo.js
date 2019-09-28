@@ -15,9 +15,10 @@ mongoose.connect("mongodb://admin:password123@ds311968.mlab.com:11968/git-connec
 // Define schema
 let usersSchema = new mongoose.Schema({
   username: String,
-  name: String,
+  firstName: String,
+  lastName: String,
   password: String,
-  githubname: String,
+  githubName: String,
   location: String,
   favoriteColor: String,
 });
@@ -27,9 +28,10 @@ let users = mongoose.model("users", usersSchema);
 
 // routes for users
 // GET
-app.get('/users', (req, res) =>
-  mongoose.model("users").find((err, users) => res.send(users))
-);
+app.get('/users', (req, res) => {
+  console.log("Get request");
+  mongoose.model("users").find((err, users) => res.send(users));
+});
 
 // POST
 // Configure express to use body-parser as middle-ware
@@ -39,9 +41,10 @@ app.use(bodyParser.json());
 app.post('/users', (req, res) => {
   users.create({
     username: req.body.username,
-    name: req.body.name,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    githubName: req.body.githubName,
     password: req.body.password,
-    githubname: req.body.githubname,
     location: req.body.location,
     favoriteColor: "Red"
   }, (err, data) => {
