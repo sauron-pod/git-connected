@@ -5,15 +5,8 @@ fetch("../../db.json").then(data => {
     console.log(data);
 });
 
-// function signOnUp(userToAdd) {
-//     console.log("We made it this far");
-//     $.ajax("../../db.json", {
-//         type: "POST",
-//         data: JSON.stringify(userToAdd)
-//     })
-// }
-
 let newUser = {};
+let nameIsNew = true;
 
 function signOnUp(userToAdd) {
     const options = {
@@ -36,7 +29,14 @@ $("#submit-signup").click(function () {
 
     fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
         return response.json().then(response => {
-            if (response.id !== undefined) {
+            response.forEach(person => {
+
+                //this is broke
+                if (person.username === $("#username-input").val("")){
+                    nameIsNew = false;
+                };
+            });
+            if (response.id !== undefined && nameIsNew) {
                 if ($("#password-input-one").val() === $("#password-input-two").val()) {
                     newUser.username = $("#username-input").val();
                     $("#username-input").val("");

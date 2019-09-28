@@ -7,6 +7,9 @@
     let githubUsername;
     const friend1 = "yaelBrown";
     const friend2 = "BranceA";
+    let allLangArrays = [];
+    let count = 0;
+    let countMax = 0;
 
     //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
     fetch("../../db.json").then(data => {
@@ -144,29 +147,31 @@
             })
             .then(data => {
                 // console.log(data);
-                const allLangArrays = [];
+                countMax = data.length;
+                console.log(countMax);
                 data.forEach(repo => {
                     fetch(repo.languages_url)
                         .then(response => {
                         return response.json();
-                    })
-                        .then(data => {
+                    }).then(data => {
                         let languages = Object.keys(data);
-                        console.log(languages);
-                        for(const language of languages) {
-                            if (allLangArrays.indexOf(language) === -1) {
-                                allLangArrays.push(language); // Somehow this line makes only unique langs display... WHY?!?!?
-                                $("#lang-list").append(`<div class="mx-2"><h4>${language}</h4></div>`);
-                                // displayLanguagesBadge(allLangArrays.length); // Displays badges for unique array lengths
+                            for(let i = 0; i < languages.length; i++) {
+                                if (allLangArrays.indexOf(languages[i]) === -1) {
+                                    allLangArrays.push(languages[i]); // Somehow this line makes only unique langs display... WHY?!?!?
+                                    $("#lang-list").append(`<div class="mx-2"><h4>${languages[i]}</h4></div>`);
+                                    // displayLanguagesBadge(allLangArrays.length); // Displays badges for unique array lengths
+                                }
+
                             }
-                        }
-                        // console.log(allLangArrays.length); // Here, length is the length of the current repo's langs
-                        displayLanguagesBadge(allLangArrays.length); // Displays a badge based on count for all repos
+                                if(count === (countMax - 1)){
+                                    console.log(allLangArrays.length);
+                                    displayLanguagesBadge(allLangArrays.length);
+                                }
+                        count ++;
                     });
                     // console.log(allLangArrays.length);  // Here, length is 0 every time.
-                });
-            })
-            .catch(error => {
+                })
+            }).catch(error => {
                 alert('Oh no! Something went wrong.\nCheck the console for details.');
                 console.log(error);
             });
