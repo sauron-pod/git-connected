@@ -1,9 +1,8 @@
-// This version of server-json is used for heroku deploys.
 
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 const jsonServer = require('json-server');
 const server = jsonServer.create();
@@ -11,6 +10,7 @@ const router = jsonServer.router('db.json');
 
 
 server.use('/api', router);
+server.use('/users', (req, res) => res.sendFile(path.join(__dirname, 'db.json')));
 
 
 // app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));

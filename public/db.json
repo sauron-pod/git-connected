@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "username": "brunch",
+      "name": "Brance",
+      "password": "abc123",
+      "githubname": "BranceA",
+      "githubavatar": "https://avatars3.githubusercontent.com/u/52936564?v=4",
+      "location": "Austin, TX",
+      "favoriteColor": "Crimson Red",
+      "friends": 
+      [
+        "oldyaeler",
+        "lemonfreejohn"
+      ],
+      "id": 5
+    },
+    {
+      "username": "oldyaeler",
+      "name": "Yael",
+      "password": "def456",
+      "githubname": "yaelBrown",
+      "githubavatar": "https://avatars.githubusercontent.com/u/18481811?",
+      "location": "Austin, TX",
+      "favoriteColor": "Magenta",
+      "friends": 
+        [
+          "brunch",
+          "lemonfreejohn"
+        ],
+      "id": 8
+    },
+    {
+      "username": "lemonfreejohn",
+      "name": "John",
+      "password": "ghi789",
+      "githubname": "cadenajohn85",
+      "githubavatar": "https://avatars3.githubusercontent.com/u/52936479?v=4",
+      "location": "Dallas, TX",
+      "favoriteColor": "Purple",
+      "friends": 
+      [
+        "brunch",
+        "oldyaeler"
+      ],
+      "id": 9
+    },
+    {
+      "username": "test",
+      "name": "cookies",
+      "password": "test",
+      "githubname": "yaelBrown",
+      "location": "ginger, bd",
+      "favoriteColor": "brown",
+      "id": 10
+    },
+    {
+      "name": "Justin",
+      "location": "San Antonio, TX",
+      "favoriteColor": "Green",
+      "id": 11
+    }
+  ]
+}

@@ -1,13 +1,13 @@
-console.log("newest test");
-fetch("../../db.json").then(data => {
-    return data.json();
-}).then(data => {
-    console.log(data);
-});
-
 let newUser = {};
-let nameIsNew = true;
 
+// Data from github api
+let ghData; 
+let githubName;
+
+// Toggle verbose console messages for development
+let verbose = true;
+
+// Function for signing users up
 function signOnUp(userToAdd) {
     const options = {
         method: 'POST',
@@ -21,7 +21,7 @@ function signOnUp(userToAdd) {
     });
 }
 
-
+// Eventlistener for signup button
 $("#submit-signup").click(function () {
 
     let githubName = $("#github-name-input").val();
@@ -68,3 +68,7 @@ $("#submit-signup").click(function () {
         })
     })
 });
+
+
+
+// Needs a way to post object to local db.
