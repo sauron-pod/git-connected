@@ -9,10 +9,7 @@ let ghDataLoggedInUser = [];
 let allLangArrays = [];
 let count = 0;
 let countMax = 0;
-let users = "cookie";
-
-let friend1 = "BranceA";
-let friend2 = "cadenajohn85";
+let users = "";
 
 //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
 fetch("/users").then(data => data.json()).then(data => {
@@ -55,7 +52,7 @@ fetch("/users").then(data => data.json()).then(data => {
 }).then(function () {
     // Display stuff after fetch is done
     displayProfile(githubUsername);
-    
+
     // displayRepos(githubUsername);
     displayLanguages(githubUsername);
 });
