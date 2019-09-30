@@ -7,6 +7,7 @@
     let githubUsername;
     const friend1 = "yaelBrown";
     const friend2 = "BranceA";
+    let followerArray = [];
     let allLangArrays = [];
     let count = 0;
     let countMax = 0;
@@ -177,21 +178,19 @@
             });
     };
 
-    // $("#add-follower").click(function () {
-    //     //This is the problem Brance
-    // }
-    //     const newFollower = $("#github-follower").val();
-    //     $("#github-follower").val("");
-    //     fetch(`https://api.github.com/users/${newFollower}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
-    //         return response.json().then(response => {
-    //             response.forEach(person => {
-    //
-    //                 //this is broke
-    //                 if (person.username === $("#username-input").val("")) {
-    //                     nameIsNew = false;
-    //                 }
-    //             });
-    //         });
+    $("#add-follower").click(function () {
+        const newFollower = $("#github-follower").val();
+        $("#github-follower").val("");
+        fetch(`../../db.json`).then(function (response) {
+            return response.json().then(response => {
+                response.users.forEach(user => {
+                    if(user.username === newFollower){
+                        followerArray.push(user);
+                    }
+                })
+            });
+        })
+    });
 
     const displayLanguagesBadge = (numberOfLanguages) => {
         let badgeImage = "";
