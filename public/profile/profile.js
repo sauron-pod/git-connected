@@ -177,6 +177,22 @@
             });
     };
 
+    // $("#add-follower").click(function () {
+    //     //This is the problem Brance
+    // }
+    //     const newFollower = $("#github-follower").val();
+    //     $("#github-follower").val("");
+    //     fetch(`https://api.github.com/users/${newFollower}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
+    //         return response.json().then(response => {
+    //             response.forEach(person => {
+    //
+    //                 //this is broke
+    //                 if (person.username === $("#username-input").val("")) {
+    //                     nameIsNew = false;
+    //                 }
+    //             });
+    //         });
+
     const displayLanguagesBadge = (numberOfLanguages) => {
         let badgeImage = "";
         let badgeAltText = "";
