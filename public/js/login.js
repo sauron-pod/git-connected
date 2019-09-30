@@ -5,6 +5,7 @@ let users = {};
 // Toggle verbose console messages for development
 let verbose = true;
 
+// Event listener for login button
 $("#login-button").click(function () {
     //This grabs the information from the input fields
     let usernameInput = $("#username").val();

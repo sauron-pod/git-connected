@@ -20,6 +20,11 @@ const friend2 = "BranceA";
 // verify profile.js loaded
 (verbose) ? console.log("profile.js loaded") : "";
 
+// Define vars for following methods
+let allLangArrays = [];
+let count = 0;
+let countMax = 0;
+
 //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
 fetch("../db.json").then(data => {
     return data.json();
@@ -102,32 +107,32 @@ const displayProfile = someUsername => {
         });
 };
 
-// Commented-out code is for testing non-functioning Promise.all
+// DisplayFriends method
 const displayFriends = () => {
     const fetchURL1 = `https://api.github.com/users/${friend1}/events/public`;
-    // const fetchURL2 = `https://api.github.com/users/${friend2}/events/public`;
-    const promise1 = fetch(fetchURL1, {headers: {'Authorization': `token ${keys}`}});
-    // const promise2 = fetch(fetchURL2, {headers: {'Authorization': `token ${gitHubKey}`}});
-    return promise1
-    // return Promise.all([promise1, promise2])
-        .then(response => response.json())
-        .then(data => {
-            // if (data[0] === undefined) {
-            //
-            // } else {
-                //Display Friend in Friends Bar
-                const friendUsername = data[0].actor.display_login;
-                const friendProfileImage = data[0].actor.avatar_url;
-                $("#friend-pic").html(`<img class="friend-pic my-2" src='${friendProfileImage}'>`);
-                $("#friend-name").html(`<h4>${friendUsername}</h4>`);
-            // }
-        })
+    const fetchURL2 = `https://api.github.com/users/${friend2}/events/public`;
+    const promise1 = fetch(fetchURL1, {headers: {'Authorization': `token ${gitHubKey}`}})
+        .then(response => response.json());
+    const promise2 = fetch(fetchURL2, {headers: {'Authorization': `token ${gitHubKey}`}})
+        .then(response => response.json());
+    return Promise.all([promise1, promise2])
+        .then(data => data.forEach(friend => {
+            // console.log(friend);
+            const friendUsername = friend[0].actor.display_login;
+            const friendProfileImage = friend[0].actor.avatar_url;
+            let dynamicHTML =
+                `<div id="friend-bar" class="content-bar">
+                    <div class="mx-2"><img class="content-pic my-2" src='${friendProfileImage}'></div>
+                    <div class="mx-2"><h4><a href="http://github.com/${friendUsername}">${friendUsername}</a></h4></div>    
+                </div>`;
+            $("#friend-display").append(dynamicHTML);
+        }))
         .catch(error => {
             alert('Oh no! Something went wrong.\nCheck the console for details.');
             console.log(error);
         });
-
 };
+
 //This takes the user's repos and appends links to said repos on the page
 const displayRepos = someUsername => {
     return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
@@ -147,26 +152,63 @@ const displayRepos = someUsername => {
 };
 
 //This bit takes user's github repos and console logs all the languages they have ever used. No real functionality yet but we can access the languages.
-
-const findLanguages = someUsername => {
+const displayLanguages = someUsername => {
     return fetch(`https://api.github.com/users/${someUsername}/repos`, {headers: {'Authorization': `token ${gitHubKey}`}})
         .then(response => {
             return response.json();
         })
         .then(data => {
+            // console.log(data);
+            countMax = data.length;
+            console.log(countMax);
             data.forEach(repo => {
-                fetch(repo.languages_url).then(response => {
+                fetch(repo.languages_url)
+                    .then(response => {
                     return response.json();
                 }).then(data => {
                     let languages = Object.keys(data);
-                    languages.forEach(language => {
-                        (verbose) ? console.log(language) : "";
-                    })
-                })
+                        for(let i = 0; i < languages.length; i++) {
+                            if (allLangArrays.indexOf(languages[i]) === -1) {
+                                allLangArrays.push(languages[i]); // Somehow this line makes only unique langs display... WHY?!?!?
+                                $("#lang-list").append(`<div class="mx-2"><h4>${languages[i]}</h4></div>`);
+                                // displayLanguagesBadge(allLangArrays.length); // Displays badges for unique array lengths
+                            }
+
+                        }
+                            if(count === (countMax - 1)){
+                                console.log(allLangArrays.length);
+                                displayLanguagesBadge(allLangArrays.length);
+                            }
+                    count ++;
+                });
+                // console.log(allLangArrays.length);  // Here, length is 0 every time.
             })
-        })
-        .catch(error => {
+        }).catch(error => {
             alert('Oh no! Something went wrong.\nCheck the console for details.');
             console.log(error);
         });
+};
+
+// Displays badges to top of page
+const displayLanguagesBadge = (numberOfLanguages) => {
+    let badgeImage = "";
+    let badgeAltText = "";
+    if (numberOfLanguages >= 2 && numberOfLanguages < 4) {
+        badgeImage = "langs1.png";
+        badgeAltText = "Bilingual: Codes in at least 2 different languages";
+    }
+    if (numberOfLanguages >= 4 && numberOfLanguages < 8) {
+        badgeImage = "langs2.png";
+        badgeAltText = "Multilingual: Codes in at least 4 different languages";
+    }
+    if (numberOfLanguages >= 8) {
+        badgeImage = "langs3.png";
+        badgeAltText = "Polyglot: Codes in at least 8 different languages";
+    }
+
+    // Display badge
+    if (badgeImage !== "") {
+        $("#badge-bar").append(`<img style='width:50px;height:50px' src='img/${badgeImage}' alt="${badgeAltText}" title="${badgeAltText}">`);
+    }
+
 };

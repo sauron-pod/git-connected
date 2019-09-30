@@ -21,39 +21,47 @@
     </header>
 
     <main>
-      <!-- Container div is necessary to make padding equal to next row -->
-      <div class="row justify-content-md-center">
-        <div class="col-6 my-4">
-          <div class="badge-bar" id="badge-bar"></div>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-3">
-          <div class="content-areas my-4 ml-2">
-            <h3>Demographic info</h3>
-          </div>
-          <div class="content-areas my-4 ml-2">
-            <div class="friends-heading">
-              <h3>Friends</h3>
+<!--        Container div is necessary to make padding equal to next row-->
+        <div class="row justify-content-md-center">
+            <div class="col-6 my-4">
+                <div class="badge-bar" id="badge-bar"></div>
             </div>
-            <div class="friend-bar" id="friend-bar">
-              <div class="mx-2" id="friend-pic"></div>
-              <div class="mx-2" id="friend-name"></div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="content-areas my-4 ml-2">
+                    Demographic info
+                </div>
+                <div class="content-areas my-4 ml-2">
+                    <div class="content-heading">
+                        <h3>Friends</h3>
+                    </div>
+                    <div id="friend-display">
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="col-6">
+                <div class="content-areas my-4">
+                    Your stories
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="content-areas my-4 mr-2">
+                    <div class="content-heading">
+                        <h3>Projects</h3>
+                    </div>
+                    <div id="repo-links">
+                    </div>
+                </div>
+                <div class="content-areas my-4 mr-2">
+                    <div class="content-heading">
+                        <h3>Languages</h3>
+                    </div>
+                    <div id="lang-list">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-          <div class="content-areas my-4">
-            <h3>Your Stories</h3>
-          </div>
-        </div>
-        <div class="col-3" id="repo-links">
-          <div class="content-areas my-4 mr-2">
-            <h3>Projects</h3>
-          </div>
-        </div>
-      </div>
     </main>
 
     <!-- Required scripts -->
