@@ -34,21 +34,30 @@ header {
     border-radius: 5px;
 }
 
-.friends-heading {
+.content-heading {
     background: #6AA833;
     color: #E8E8E8;
     text-align: center;
 }
 
-.friend-bar {
+.content-bar {
     display: flex;
     color: #4A7526;
     align-items: center;
 }
 
-.friend-pic {
+.content-areas a {
+    color: #4A7526;
+}
+
+.content-pic {
     height: 75px;
     width: 75px;
     border: solid #4A7526 3px;
     border-radius: 250px;
 }
+
+.friend-bar {
+    display: flex;
+}
+

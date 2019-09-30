@@ -1,11 +1,5 @@
 "use strict";
 
-// const keys = require('./keys')
-// import keys from './keys'
-// require('dotenv').config()
-// const key = process.env.GITHUB_KEY 
-// console.log("KEY:  ", key)
-
 // Define verbose mode
 let verbose = true;
 
@@ -24,12 +18,13 @@ const friend2 = "BranceA";
 let allLangArrays = [];
 let count = 0;
 let countMax = 0;
+let githubData = [];
 
 //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
-fetch("../db.json").then(data => {
+fetch("http://localhost:3000/users").then(data => {
     return data.json();
 }).then(data => {
-    let users = data.users;
+    let users = data;
 
     users.forEach(user => {
         if (user.username === thisUser) {
@@ -40,20 +35,22 @@ fetch("../db.json").then(data => {
     displayProfile(githubUsername);
     displayFriends();
     displayRepos(githubUsername);
-    findLanguages(githubUsername);
+    displayLanguages(githubUsername);
 });
 
 const displayProfile = someUsername => {
-    return fetch(`https://api.github.com/users/${someUsername}/events/public`, {headers: {'Authorization': `token ${keys}`}})
-        .then(response => {
+    return fetch(`https://api.github.com/users/${someUsername}/events/public`, {
+        headers: {
+            'Authorization': `${gitHubKey}`
+    }}).then(response => {
             return response.json();
-        })
-        .then(data => {
+        }).then(data => {
+            githubData = data;
             if (data[0] === undefined) {
                 // $("#profile-pic").html(`<img class="profile-pic" style="background:#4A7526">`);
                 $("#profile-pic").css("display", "none");
                 $("#username-banner").html("");
-                $("main").html("User has not pushed in last 90 days -- information currently unavailable.");
+                // $("main").html("User has not pushed in last 90 days -- information currently unavailable.");
             } else {
                 //Display Profile Image
                 const profileImage = data[0].actor.avatar_url;
