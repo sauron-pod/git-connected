@@ -29,6 +29,7 @@ $("#submit-signup").click(function () {
 
     fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
         return response.json().then(response => {
+            console.log(response);
             response.forEach(person => {
 
                 //this is broke
