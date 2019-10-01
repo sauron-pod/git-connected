@@ -194,12 +194,14 @@ const displayLoggedInUser = () => {
     $("#logged-in-user").html(html);
 };
 
+displayLoggedInUser();
+
 $("#logout-icon").on("click", function() {
     // When user logs out, username is cleared from storage so you can't click "Back" and return to a logged-in profile page
     sessionStorage.removeItem("username");
     document.location.href = "index.html";
 });
 
-displayLoggedInUser();
+
 
 
