@@ -1,13 +1,14 @@
-console.log("newest test");
-fetch("../../db.json").then(data => {
-    return data.json();
-}).then(data => {
-    console.log(data);
-});
-
 let newUser = {};
-let nameIsNew = true;
 
+// Data from github api
+let ghData; 
+let githubName;
+let nameIsNew = false;
+
+// Toggle verbose console messages for development
+let verbose = true;
+
+// Function for signing users up
 function signOnUp(userToAdd) {
     const options = {
         method: 'POST',
@@ -21,21 +22,25 @@ function signOnUp(userToAdd) {
     });
 }
 
-
+// Eventlistener for signup button
 $("#submit-signup").click(function () {
 
-    let githubName = $("#github-name-input").val();
-    console.log(githubName);
 
+
+    let githubName = $("#github-name-input").val();
+
+    fetch("http://localhost:3000/users").then(response => {
+        return response.json();
+    }).then(data => {
+        data.users.forEach(user => {
+            if (user.username === $("#username-input").val()){
+                nameIsNew = false;
+            };
+        })
+    }).then(()=>{
     fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
         return response.json().then(response => {
-            response.forEach(person => {
-
-                //this is broke
-                if (person.username === $("#username-input").val("")){
-                    nameIsNew = false;
-                };
-            });
+            console.log(response);
             if (response.id !== undefined && nameIsNew) {
                 if ($("#password-input-one").val() === $("#password-input-two").val()) {
                     newUser.username = $("#username-input").val();
@@ -67,4 +72,8 @@ $("#submit-signup").click(function () {
             signOnUp(newUser);
         })
     })
+    });
 });
+
+
+// Needs a way to post object to local db.

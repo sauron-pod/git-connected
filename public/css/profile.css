@@ -1,3 +1,7 @@
+h4 {
+    font-size: .8rem;
+}
+
 header {
     background: #6AA833;
     height: 100px;
@@ -19,6 +23,15 @@ header {
     left: 75px;
     top: 25px;
     color: #E8E8E8;
+}
+
+.logged-in-user {
+    color: #E8E8E8;
+    position: absolute;
+    right: 10px;
+    top: 75px;
+    display: flex;
+    align-items: center;
 }
 
 .badge-bar {
