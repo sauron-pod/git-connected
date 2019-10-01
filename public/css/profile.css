@@ -25,6 +25,15 @@ header {
     color: #E8E8E8;
 }
 
+.logged-in-user {
+    color: #E8E8E8;
+    position: absolute;
+    right: 10px;
+    top: 75px;
+    display: flex;
+    align-items: center;
+}
+
 .badge-bar {
     display: flex;
     justify-content: center;
