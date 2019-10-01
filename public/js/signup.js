@@ -3,7 +3,7 @@ let newUser = {};
 // Data from github api
 let ghData; 
 let githubName;
-let nameIsNew = false;
+let nameIsNew = true;
 
 // Toggle verbose console messages for development
 let verbose = true;
@@ -24,8 +24,6 @@ function signOnUp(userToAdd) {
 
 // Eventlistener for signup button
 $("#submit-signup").click(function () {
-
-
 
     let githubName = $("#github-name-input").val();
 
