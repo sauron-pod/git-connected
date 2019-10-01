@@ -141,7 +141,7 @@ const displayLanguages = someUsername => {
                     let languages = Object.keys(data);
                         for(let i = 0; i < languages.length; i++) {
                             if (allLangArrays.indexOf(languages[i]) === -1) {
-                                allLangArrays.push(languages[i]); // Somehow this line makes only unique langs display... WHY?!?!?
+                                allLangArrays.push(languages[i]);
                                 $("#lang-list").append(`<div class="mx-2"><h4>${languages[i]}</h4></div>`);
                                 // displayLanguagesBadge(allLangArrays.length); // Displays badges for unique array lengths
                             }
@@ -183,3 +183,23 @@ const displayLanguagesBadge = (numberOfLanguages) => {
         $("#badge-bar").append(`<img style='width:50px;height:50px' src='img/${badgeImage}' alt="${badgeAltText}" title="${badgeAltText}">`);
     }
 };
+
+// Creates logged-in user display and signout at top-right corner inside green header bar
+const displayLoggedInUser = () => {
+    let html = `<div class="logged-in-user">`;
+    html += `<i class="fas fa-user-circle mx-1"></i>`;
+    html += `<div class="mx-1">${loggedInUser}</div>`;
+    html += `<i class="fas fa-sign-out-alt mx-3" id="logout-icon"></i>`
+    html += `</div>`;
+    $("#logged-in-user").html(html);
+};
+
+$("#logout-icon").on("click", function() {
+    // When user logs out, username is cleared from storage so you can't click "Back" and return to a logged-in profile page
+    sessionStorage.removeItem("username");
+    document.location.href = "index.html";
+});
+
+displayLoggedInUser();
+
+
