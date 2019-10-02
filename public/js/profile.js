@@ -10,6 +10,8 @@ let allLangArrays = [];
 let count = 0;
 let countMax = 0;
 let users = "";
+const loggedInUserObject = getUserOnLoad();
+console.log(loggedInUserObject);
 
 //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
 fetch("/users").then(data => data.json()).then(data => {
@@ -199,3 +201,14 @@ $("#logout-icon").on("click", function() {
     sessionStorage.removeItem("username");
     document.location.href = "index.html";
 });
+
+function getUserOnLoad() {
+    fetch("/users").then(data => data.json()).then(users => {
+        users.forEach(user => {
+            if (user.username === loggedInUser) {
+                console.log(user);
+                return user;
+            }
+        });
+    });
+}
