@@ -18,6 +18,7 @@ function signOnUp(userToAdd) {
         body: JSON.stringify(userToAdd),
     };
     fetch("http://localhost:3000/users", options).then(() => {
+        document.location.href = "index.html";
         console.log("We did it boys");
     });
 }

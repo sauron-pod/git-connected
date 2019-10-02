@@ -116,6 +116,22 @@
     },
     {
       "id": 31
+    },
+    {
+      "username": "testname",
+      "firstName": "test",
+      "lastName": "test",
+      "githubName": "BranceA",
+      "password": "test",
+      "id": 32
+    },
+    {
+      "username": "moretest",
+      "firstName": "moretest",
+      "lastName": "moretest",
+      "githubName": "BranceA",
+      "password": "moretest",
+      "id": 33
     }
   ]
 }
