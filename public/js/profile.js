@@ -10,6 +10,8 @@ let allLangArrays = [];
 let count = 0;
 let countMax = 0;
 let users = "";
+let followerArray = [];
+let loggedInUserObject;
 
 //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
 fetch("/users").then(data => data.json()).then(data => {
@@ -18,12 +20,13 @@ fetch("/users").then(data => data.json()).then(data => {
     (verbose) ? console.log(users) : "";
     users.forEach((u, i) => {
         if (u.username == loggedInUser) {
+            loggedInUserObject = u;
+            console.log(loggedInUserObject);
             githubUsername = u.githubname;
             currentUserIdx = i;
             (verbose) ? console.log("ghusername is " + githubUsername) : "";
         }
     });
-    console.log(users[currentUserIdx].friends);
 
     // Function to print friends to page based off fetched data
     const printFriendsToPage = () => {
@@ -128,9 +131,7 @@ const displayLanguages = someUsername => {
             data.forEach(repo => {
                 $("#repo-links").append(`<div class="mx-2"><h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4></div>`);
             });
-            // console.log(data);
             countMax = data.length;
-            console.log(countMax);
             data.forEach(repo => {
                 fetch(repo.languages_url)
                     .then(response => {
@@ -145,12 +146,10 @@ const displayLanguages = someUsername => {
                             }
                         }
                             if(count === (countMax - 1)){
-                                console.log(allLangArrays.length);
                                 displayLanguagesBadge(allLangArrays.length);
                             }
                     count ++;
                 });
-                // console.log(allLangArrays.length);  // Here, length is 0 every time.
             })
         }).catch(error => {
             alert('Oh no! Something went wrong.\nCheck the console for details.');
@@ -199,3 +198,46 @@ $("#logout-icon").on("click", function() {
     sessionStorage.removeItem("username");
     document.location.href = "index.html";
 });
+
+function getUserOnLoad() {
+    fetch("/users").then(data => data.json()).then(users => {
+        users.forEach(user => {
+            if (user.username === loggedInUser) {
+                console.log(user);
+                return user;
+            }
+        });
+    });
+}
+
+$("#add-follower").click(function () {
+    console.log(loggedInUserObject);
+    let newFollower = $("#github-follower").val();
+    $("#github-follower").val("");
+    fetch(`/users`).then(function (response) {
+        return response.json().then(response => {
+            response.forEach(user => {
+                if(user.username === newFollower){
+                    loggedInUserObject.friends.push(newFollower);
+                    updateFriends(loggedInUserObject);
+                }
+            })
+        });
+    }).then(()=>{
+
+    })
+});
+
+function updateFriends(userToAdd) {
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userToAdd),
+    };
+    fetch(`http://localhost:3000/users/${loggedInUserObject.id}`, options).then(() => {
+        console.log("We did it boys");
+        console.log(loggedInUserObject);
+    });
+}
