@@ -199,33 +199,43 @@ $("#logout-icon").on("click", function() {
     document.location.href = "index.html";
 });
 
-function getUserOnLoad() {
-    fetch("/users").then(data => data.json()).then(users => {
-        users.forEach(user => {
-            if (user.username === loggedInUser) {
-                console.log(user);
-                return user;
-            }
-        });
-    });
-}
+// function getUserOnLoad() {
+//     fetch("/users").then(data => data.json()).then(users => {
+//         users.forEach(user => {
+//             if (user.username === loggedInUser) {
+//                 console.log(user);
+//                 return user;
+//             }
+//         });
+//     });
+// }
 
 $("#add-follower").click(function () {
-    console.log(loggedInUserObject);
+    console.log(loggedInUserObject.friends);
+    let isNewFollowerNew = true;
     let newFollower = $("#github-follower").val();
     $("#github-follower").val("");
-    fetch(`/users`).then(function (response) {
-        return response.json().then(response => {
-            response.forEach(user => {
-                if(user.username === newFollower){
-                    loggedInUserObject.friends.push(newFollower);
-                    updateFriends(loggedInUserObject);
-                }
-            })
-        });
-    }).then(()=>{
+    for(let i = 0; i < loggedInUserObject.friends.length; i++){
+        if(loggedInUserObject.friends[i] === newFollower){
+            isNewFollowerNew = false;
+        }
+    }
+    if(isNewFollowerNew && loggedInUserObject.username !== newFollower) {
+        fetch(`/users`).then(function (response) {
+            return response.json().then(response => {
+                response.forEach(user => {
+                    if (user.username === newFollower) {
+                        loggedInUserObject.friends.push(newFollower);
+                        updateFriends(loggedInUserObject);
+                    }
+                })
+            });
+        }).then(() => {
 
-    })
+        })
+    }else {
+        alert("You are already following that user.")
+    }
 });
 
 function updateFriends(userToAdd) {
