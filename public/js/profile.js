@@ -111,11 +111,6 @@ const displayProfile = someUsername => {
                 if (badgeImage !== "") {
                     $("#badge-bar").html(`<img style='width:50px;height:50px' src='${badgeImage}' alt="${badgeAltText}" title="${badgeAltText}">`);
                 }
-                
-                // Get the repos to load
-                data.forEach(e => {
-                    $("#repo-links").append(`<div class="mx-2"><h4><a href="${e.repo.html_url}" target="_blank">${e.repo.name}</a></h4></div>`);
-                });
             };
         }).catch(error => {
             alert('Oh no! Something went wrong.\nCheck the console for details.');
@@ -130,6 +125,9 @@ const displayLanguages = someUsername => {
             return response.json();
         })
         .then(data => {
+            data.forEach(repo => {
+                $("#repo-links").append(`<div class="mx-2"><h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4></div>`);
+            });
             // console.log(data);
             countMax = data.length;
             console.log(countMax);
@@ -201,7 +199,3 @@ $("#logout-icon").on("click", function() {
     sessionStorage.removeItem("username");
     document.location.href = "index.html";
 });
-
-
-
-
