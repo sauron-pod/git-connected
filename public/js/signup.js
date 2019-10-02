@@ -3,6 +3,7 @@ let newUser = {};
 // Data from github api
 let ghData; 
 let githubName;
+let nameIsNew = true;
 
 // Toggle verbose console messages for development
 let verbose = true;
@@ -17,6 +18,7 @@ function signOnUp(userToAdd) {
         body: JSON.stringify(userToAdd),
     };
     fetch("http://localhost:3000/users", options).then(() => {
+        document.location.href = "index.html";
         console.log("We did it boys");
     });
 }
@@ -25,18 +27,27 @@ function signOnUp(userToAdd) {
 $("#submit-signup").click(function () {
 
     let githubName = $("#github-name-input").val();
-    console.log(githubName);
 
-    fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
+    fetch("http://localhost:3000/users").then(response => {
+        return response.json();
+    }).then(data => {
+        console.log(data);
+        data.forEach(user => {
+            console.log(user.username);
+            if (user.username === $("#username-input").val()){
+                console.log("we made it here");
+                return Promise.reject("Username already taken.");
+            };
+        })
+    }, (err) => {
+        console.log(err);
+    }).catch(err => {
+        console.log(err);
+        return Promise.reject("Username already taken.");
+    }).then(()=>{ fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
         return response.json().then(response => {
-            response.forEach(person => {
-
-                //this is broke
-                if (person.username === $("#username-input").val("")){
-                    nameIsNew = false;
-                };
-            });
-            if (response.id !== undefined && nameIsNew) {
+            console.log(response);
+            if (response.id !== undefined) {
                 if ($("#password-input-one").val() === $("#password-input-two").val()) {
                     newUser.username = $("#username-input").val();
                     $("#username-input").val("");
@@ -60,15 +71,29 @@ $("#submit-signup").click(function () {
                     $("#last-name").val("");
                     alert("Passwords do not match");
                 }
+            } else if(response.message === "Not Found"){
+                $("#password-input-one").val("");
+                $("#password-input-two").val("");
+                $("#username-input").val("");
+                $("#github-name-input").val("");
+                $("#first-name").val("");
+                $("#last-name").val("");
+                alert("Username already taken")
             } else if (response.id === undefined){
+                $("#password-input-one").val("");
+                $("#password-input-two").val("");
+                $("#username-input").val("");
+                $("#github-name-input").val("");
+                $("#first-name").val("");
+                $("#last-name").val("");
                 alert("Please enter your Github username");
             }
         }).then(newUser => {
             signOnUp(newUser);
         })
     })
+    })
 });
-
 
 
 // Needs a way to post object to local db.
