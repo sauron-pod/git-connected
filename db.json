@@ -8,8 +8,7 @@
       "githubavatar": "https://avatars3.githubusercontent.com/u/52936564?v=4",
       "location": "Austin, TX",
       "favoriteColor": "Crimson Red",
-      "friends": 
-      [
+      "friends": [
         "oldyaeler",
         "lemonfreejohn"
       ],
@@ -23,11 +22,10 @@
       "githubavatar": "https://avatars.githubusercontent.com/u/18481811?",
       "location": "Austin, TX",
       "favoriteColor": "Magenta",
-      "friends": 
-        [
-          "brunch",
-          "lemonfreejohn"
-        ],
+      "friends": [
+        "brunch",
+        "lemonfreejohn"
+      ],
       "id": 8
     },
     {
@@ -38,8 +36,7 @@
       "githubavatar": "https://avatars3.githubusercontent.com/u/52936479?v=4",
       "location": "Dallas, TX",
       "favoriteColor": "Purple",
-      "friends": 
-      [
+      "friends": [
         "brunch",
         "oldyaeler"
       ],
@@ -59,6 +56,66 @@
       "location": "San Antonio, TX",
       "favoriteColor": "Green",
       "id": 11
+    },
+    {
+      "id": 12
+    },
+    {
+      "id": 13
+    },
+    {
+      "id": 14
+    },
+    {
+      "id": 15
+    },
+    {
+      "id": 16
+    },
+    {
+      "id": 17
+    },
+    {
+      "id": 18
+    },
+    {
+      "id": 19
+    },
+    {
+      "id": 20
+    },
+    {
+      "id": 21
+    },
+    {
+      "id": 22
+    },
+    {
+      "id": 23
+    },
+    {
+      "id": 24
+    },
+    {
+      "id": 25
+    },
+    {
+      "id": 26
+    },
+    {
+      "id": 27
+    },
+    {
+      "id": 28
+    },
+    {
+      "id": 29
+    },
+    {
+      "id": 30
+    },
+    {
+      "id": 31
     }
   ]
 }

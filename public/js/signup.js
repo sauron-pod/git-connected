@@ -30,16 +30,23 @@ $("#submit-signup").click(function () {
     fetch("http://localhost:3000/users").then(response => {
         return response.json();
     }).then(data => {
-        data.users.forEach(user => {
+        console.log(data);
+        data.forEach(user => {
+            console.log(user.username);
             if (user.username === $("#username-input").val()){
-                nameIsNew = false;
+                console.log("we made it here");
+                return Promise.reject("Username already taken.");
             };
         })
-    }).then(()=>{
-    fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
+    }, (err) => {
+        console.log(err);
+    }).catch(err => {
+        console.log(err);
+        return Promise.reject("Username already taken.");
+    }).then(()=>{ fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
         return response.json().then(response => {
             console.log(response);
-            if (response.id !== undefined && nameIsNew) {
+            if (response.id !== undefined) {
                 if ($("#password-input-one").val() === $("#password-input-two").val()) {
                     newUser.username = $("#username-input").val();
                     $("#username-input").val("");
@@ -63,14 +70,28 @@ $("#submit-signup").click(function () {
                     $("#last-name").val("");
                     alert("Passwords do not match");
                 }
+            } else if(response.message === "Not Found"){
+                $("#password-input-one").val("");
+                $("#password-input-two").val("");
+                $("#username-input").val("");
+                $("#github-name-input").val("");
+                $("#first-name").val("");
+                $("#last-name").val("");
+                alert("Username already taken")
             } else if (response.id === undefined){
+                $("#password-input-one").val("");
+                $("#password-input-two").val("");
+                $("#username-input").val("");
+                $("#github-name-input").val("");
+                $("#first-name").val("");
+                $("#last-name").val("");
                 alert("Please enter your Github username");
             }
         }).then(newUser => {
             signOnUp(newUser);
         })
     })
-    });
+    })
 });
 
 
