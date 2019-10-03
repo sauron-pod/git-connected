@@ -330,13 +330,13 @@ function updateFriends(userToAdd) {
 }
 
 $("#find-btn").click(function () {
-    let searchInput = $("#search-input").val();
+    let searchInput = $("#search-input").val().toLowerCase().trim();
     let confirmedUser = "";
     $("#search-input").val("");
 
     allUsers.forEach(person => {
         console.log(person.id);
-        if(person.username === searchInput){
+        if(person.username.toLowerCase() === searchInput){
             confirmedUser = person;
         }
     });
