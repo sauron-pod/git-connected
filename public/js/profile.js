@@ -26,20 +26,31 @@ const printFriendsToPage = (user) => {
                 html += `</div>`;
                 html += `<div class="mx-2">`;
                 html += `<h4>`;
-                html += `<a href="http://github.com/${e.githubname}">${e.username}</a>`;
+                html += `<a href="http://github.com/${e.githubname}" class="${e.username}" id="follower-link">${e.username}</a>`;
                 html += `</h4>`;
                 html += `</div>`;
-                html += `<p class="remove-friend" id="${e.id}">X</p>`;
+                html += `<p class="remove-friend" id="${e.username}">X</p>`;
                 html += `</div>`;
             };
         });
     });
     // Print (friends) html to page
     $("#friend-display").html(html);
-    // Need to turn friends into objects before I do this
-    // $(".remove-friend").click(function () {
-    //     let
+    $(".remove-friend").click(function () {
+        let removeName = $(this).attr('id');
+        let index = loggedInUserObject.friends.indexOf(removeName);
+        loggedInUserObject.friends.splice(index, 1);
+        updateFriends(loggedInUserObject);
+        printFriendsToPage(loggedInUserObject);
+    });
+
+    // $("#follower-link").click(function (event) {
+    //     event.preventDefault();
+    //     let clickedId = $(this).attr('class');
+    //     console.log(clickedId);
+    //
     // })
+
 };
 
 // Populates "Comments" section with the strings stored in the user's "Comments" property on the database
