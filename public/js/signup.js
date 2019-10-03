@@ -18,7 +18,7 @@ function signOnUp(userToAdd) {
         body: JSON.stringify(userToAdd),
     };
     fetch("http://localhost:3000/users", options).then(() => {
-        // document.location.href = "index.html";
+        document.location.href = "index.html";
         console.log("We did it boys");
     });
 }
@@ -57,7 +57,7 @@ $("#submit-signup").click(function () {
                     $("#first-name").val("");
                     newUser.lastName = $("#last-name").val();
                     $("#last-name").val("");
-                    newUser.githubName = $("#github-name-input").val();
+                    newUser.githubname = $("#github-name-input").val();
                     $("#github-name-input").val("");
                     newUser.password = $("#password-input-one").val();
                     $("#password-input-one").val("");

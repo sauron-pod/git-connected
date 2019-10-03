@@ -294,6 +294,57 @@
         "brunch"
       ],
       "id": 42
+    },
+    {
+      "username": "didifix",
+      "firstName": "Brance",
+      "lastName": "pleaseword",
+      "githubName": "BranceA",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 43
+    },
+    {
+      "username": "mitch",
+      "firstName": "Mitch",
+      "lastName": "Test",
+      "githubName": "MitchellArnold",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 44
+    },
+    {
+      "username": "lasttest",
+      "firstName": "Kevin",
+      "lastName": "Test",
+      "githubname": "KevinArnall",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 45
     }
   ]
 }
