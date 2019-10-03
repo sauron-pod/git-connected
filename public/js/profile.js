@@ -19,7 +19,7 @@ const printFriendsToPage = (user) => {
     let html = "";
     temp.forEach(d => {
         allUsers.forEach(e => {
-            if (e.username == d.username) {
+            if (e.username == d) {
                 html += `<div id="friend-bar" class="content-bar">`;
                 html += `<div class="mx-2">`;
                 html += `<img class="content-pic my-2" src='${e.githubavatar}'>`;
@@ -254,7 +254,7 @@ $("#add-follower").click(function () {
             return response.json().then(response => {
                 response.forEach(user => {
                     if (user.username === newFollower) {
-                        loggedInUserObject.friends.push(user);
+                        loggedInUserObject.friends.push(user.username);
                         updateFriends(loggedInUserObject);
                     }
                 })
