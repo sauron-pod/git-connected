@@ -60,6 +60,10 @@ $("#submit-signup").click(function () {
                     newUser.password = $("#password-input-one").val();
                     $("#password-input-one").val("");
                     $("#password-input-two").val("");
+                    newUser.comments = [{
+                            "content": "Welcome!",
+                            "author": "GC Staff"
+                        }];
 
                     return newUser;
                 } else {
