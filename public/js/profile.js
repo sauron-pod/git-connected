@@ -261,21 +261,20 @@ const displayLoggedInUser = (user) => {
     let html = `<div class="logged-in-user">`;
     html += `<i class="fas fa-user-circle mx-1"></i>`;
     html += `<div class="mx-1">${loggedInUser}</div>`;
-    html += `<i class="fas fa-sign-out-alt mx-3" id="logout-icon"></i>`
+    html += `<i class="fas fa-sign-out-alt mx-3" id="logout-icon"></i>`;
     html += `</div>`;
     $("#logged-in-user").html(html);
     $("#username-banner").html(`<h1 class="username-banner">${user.username}</h1>`);
+    $("#logout-icon").click(function() {
+        // When user logs out, username is cleared from storage so you can't click "Back" and return to a logged-in profile page
+        console.log("test");
+        sessionStorage.removeItem("username");
+        document.location.href = "index.html";
+    });
 };
 
 //Moved displayLoggedInUser to call after the fetch on page load. Currently line 110.
 
-//Changed click event to target whole div instead of tiny icon. Icon was broke and I think this is better.
-$("#logged-in-user").click(function() {
-    // When user logs out, username is cleared from storage so you can't click "Back" and return to a logged-in profile page
-    console.log("test");
-    sessionStorage.removeItem("username");
-    document.location.href = "index.html";
-});
 
 // function getUserOnLoad() {
 //     fetch("/users").then(data => data.json()).then(users => {
