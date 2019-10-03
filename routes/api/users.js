@@ -4,7 +4,7 @@ const usersCollection = require('../../models/users');
 
 router.get('/users', async (req, res) => {
   try {
-    let data = usersCollection.find();
+    let data = await usersCollection.find();
     res.json(data);
   } catch (err) {
     console.error(err.message);
@@ -12,7 +12,7 @@ router.get('/users', async (req, res) => {
   }
 });
 
-router.post('/users', async (req, res) => {
+router.post('/users', (req, res) => {
   try {
     console.log(req.body);
     let newUser = new usersCollection({
@@ -30,6 +30,6 @@ router.post('/users', async (req, res) => {
     console.error(error.message);
     res.status(500).json({msg: "Unable to POST"});
   }
-})
+});
 
 module.exports = router;

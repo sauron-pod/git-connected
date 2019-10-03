@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Static endpoint handlers
 app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/users', require('./routes/api/users'));
+app.use('/users/', require('./routes/api/users'));
 
 // Connect to mongo DB
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,7 +25,7 @@ const db = mongoose.connection;
 // Handle DB errors
 db.on('error', (err) => console.log(err));
 db.once('open', () => {
-  require('./routes/api/users');
+  require('./routes/api/Users');
   console.log("db listening on port: " + config.PORT);
 });
 
