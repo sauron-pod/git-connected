@@ -12,6 +12,7 @@ let countMax = 0;
 let users = "";
 let loggedInUserObject;
 let allUsers = [];
+let isUserHome = true;
 
 // Function to print friends to page based off fetched data
 const printFriendsToPage = (user) => {
@@ -26,7 +27,7 @@ const printFriendsToPage = (user) => {
                 html += `</div>`;
                 html += `<div class="mx-2">`;
                 html += `<h4>`;
-                html += `<a href="http://github.com/${e.githubname}" class="${e.username}" id="follower-link">${e.username}</a>`;
+                html += `<a href="http://github.com/${e.githubname}" id="${e.id}" class="follower-link">${e.username}</a>`;
                 html += `</h4>`;
                 html += `</div>`;
                 html += `<p class="remove-friend" id="${e.username}">X</p>`;
@@ -37,21 +38,49 @@ const printFriendsToPage = (user) => {
     // Print (friends) html to page
     $("#friend-display").html(html);
     $(".remove-friend").click(function () {
-        let removeName = $(this).attr('id');
-        let index = loggedInUserObject.friends.indexOf(removeName);
-        loggedInUserObject.friends.splice(index, 1);
-        updateFriends(loggedInUserObject);
-        printFriendsToPage(loggedInUserObject);
+        if(isUserHome) {
+            let removeName = $(this).attr('id');
+            let index = loggedInUserObject.friends.indexOf(removeName);
+            loggedInUserObject.friends.splice(index, 1);
+            updateFriends(loggedInUserObject);
+            printFriendsToPage(loggedInUserObject);
+        }
     });
 
-    // $("#follower-link").click(function (event) {
-    //     event.preventDefault();
-    //     let clickedId = $(this).attr('class');
-    //     console.log(clickedId);
-    //
-    // })
+    $(".follower-link").click(function (event) {
+        event.preventDefault();
+        let clickedId = $(this).attr('id');
+        let clickedUser = {};
+        allUsers.forEach(person => {
+            console.log(person.id);
+            if(person.id == clickedId){
+                clickedUser = person;
+            }
+        })
+        //JOHN!!!!!!! This is manipulating the page when you click on a follower. If you need to change the DOM do it under these functions.
+        console.log(clickedUser);
+        printFriendsToPage(clickedUser);
+        displayComments(clickedUser);
+        displayLanguages(clickedUser.githubname);
+        displayProfile(clickedUser.githubname);
+        displayLoggedInUser(clickedUser);
+        isUserHome = false;
+        $("#go-home-btn").css("display", "inline-block");
+
+        //JOHN!!!!!!! Don't add anything else beyond this point.
+    })
 
 };
+
+$("#go-home-btn").click(function () {
+    printFriendsToPage(loggedInUserObject);
+    displayComments(loggedInUserObject);
+    displayLanguages(loggedInUserObject.githubname);
+    displayProfile(loggedInUserObject.githubname);
+    displayLoggedInUser(loggedInUserObject);
+    isUserHome = true;
+    $("#go-home-btn").css("display", "none");
+});
 
 // Populates "Comments" section with the strings stored in the user's "Comments" property on the database
 const displayComments = (user) => {
@@ -69,7 +98,7 @@ const displayComments = (user) => {
         html += `</div>`;
     }
     // Print (comments) html to page
-    $("#comments").append(html);
+    $("#comments").html(html);
 };
 
 //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
@@ -91,6 +120,8 @@ fetch("/users").then(data => data.json()).then(data => {
     printFriendsToPage(loggedInUserObject);
 
     displayComments(loggedInUserObject);
+
+    displayLoggedInUser(loggedInUserObject);
 
 }).then(function () {
     // Display stuff after fetch is done
@@ -115,7 +146,7 @@ const displayProfile = someUsername => {
                 $("#profile-pic").html(`<img class="profile-pic" src='${profileImage}'>`);
 
                 //Display Username in Heading
-                $("#username-banner").html(`<h1 class="username-banner">${loggedInUserObject.username}</h1>`);
+                //I moved where the banner is generated to displayLoggedInUserFunction
 
                 // Define date of last push
                 const lastCommit = data.filter(data => data.type === "PushEvent")[0].created_at;
@@ -168,6 +199,10 @@ const displayLanguages = someUsername => {
             return response.json();
         })
         .then(data => {
+            console.log(data);
+            $("#repo-links").html(" ");
+            $("#lang-list").html(" ");
+            allLangArrays = [];
             data.forEach(repo => {
                 $("#repo-links").append(`<div class="mx-2"><h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4></div>`);
             });
@@ -222,22 +257,24 @@ const displayLanguagesBadge = (numberOfLanguages) => {
 };
 
 // Creates logged-in user display and signout at top-right corner inside green header bar
-const displayLoggedInUser = () => {
+const displayLoggedInUser = (user) => {
     let html = `<div class="logged-in-user">`;
     html += `<i class="fas fa-user-circle mx-1"></i>`;
     html += `<div class="mx-1">${loggedInUser}</div>`;
-    html += `<i class="fas fa-sign-out-alt mx-3" id="logout-icon"></i>`
+    html += `<i class="fas fa-sign-out-alt mx-3" id="logout-icon"></i>`;
     html += `</div>`;
     $("#logged-in-user").html(html);
+    $("#username-banner").html(`<h1 class="username-banner">${user.username}</h1>`);
+    $("#logout-icon").click(function() {
+        // When user logs out, username is cleared from storage so you can't click "Back" and return to a logged-in profile page
+        console.log("test");
+        sessionStorage.removeItem("username");
+        document.location.href = "index.html";
+    });
 };
 
-displayLoggedInUser();
+//Moved displayLoggedInUser to call after the fetch on page load. Currently line 110.
 
-$("#logout-icon").on("click", function() {
-    // When user logs out, username is cleared from storage so you can't click "Back" and return to a logged-in profile page
-    sessionStorage.removeItem("username");
-    document.location.href = "index.html";
-});
 
 // function getUserOnLoad() {
 //     fetch("/users").then(data => data.json()).then(users => {
@@ -302,4 +339,37 @@ $("#submit-comment").click(function() {
     loggedInUserObject.comments.push(newComment);
     updateFriends(loggedInUserObject);
     displayComments();
+});
+
+$("#find-btn").click(function () {
+    let searchInput = $("#search-input").val().toLowerCase().trim();
+    let confirmedUser = "";
+    $("#search-input").val("");
+
+    allUsers.forEach(person => {
+        console.log(person.id);
+        if(person.username.toLowerCase() === searchInput){
+            confirmedUser = person;
+        }
+    });
+    console.log(confirmedUser);
+    printFriendsToPage(confirmedUser);
+    displayComments(confirmedUser);
+    displayLanguages(confirmedUser.githubname);
+    displayProfile(confirmedUser.githubname);
+    displayLoggedInUser(confirmedUser);
+    isUserHome = false;
+    $("#go-home-btn").css("display", "inline-block");
+});
+
+const searchInput = document.getElementById("search-input");
+const findBtn = document.getElementById("find-btn");
+
+console.log(searchInput);
+
+searchInput.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        findBtn.click();
+    }
 });
