@@ -132,6 +132,26 @@
             }
           ],
           "id": 9
+        },
+        {
+          "username": "oldyaeler",
+          "name": "Yael",
+          "password": "def456",
+          "githubname": "yaelBrown",
+          "githubavatar": "https://avatars.githubusercontent.com/u/18481811?",
+          "location": "Austin, TX",
+          "favoriteColor": "Magenta",
+          "friends": [
+            "brunch",
+            "lemonfreejohn"
+          ],
+          "comments": [
+            {
+              "content": "Welcome!",
+              "author": "GC Staff"
+            }
+          ],
+          "id": 8
         }
       ],
       "id": 10

@@ -245,7 +245,7 @@ $("#add-follower").click(function () {
     let newFollower = $("#github-follower").val();
     $("#github-follower").val("");
     for(let i = 0; i < loggedInUserObject.friends.length; i++){
-        if(loggedInUserObject.friends[i] === newFollower){
+        if(loggedInUserObject.friends[i].username === newFollower){
             isNewFollowerNew = false;
         }
     }
