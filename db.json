@@ -71,95 +71,23 @@
       "id": 9
     },
     {
-      "username": "test",
-      "name": "cookies",
-      "password": "test",
-      "githubname": "yaelBrown",
-      "location": "ginger, bd",
-      "favoriteColor": "brown",
-      "id": 10
-    },
-    {
-      "name": "Justin",
-      "location": "San Antonio, TX",
-      "favoriteColor": "Green",
-      "id": 11
-    },
-    {
-      "id": 12
-    },
-    {
-      "id": 13
-    },
-    {
-      "id": 14
-    },
-    {
-      "id": 15
-    },
-    {
-      "id": 16
-    },
-    {
-      "id": 17
-    },
-    {
-      "id": 18
-    },
-    {
-      "id": 19
-    },
-    {
-      "id": 20
-    },
-    {
-      "id": 21
-    },
-    {
-      "id": 22
-    },
-    {
-      "id": 23
-    },
-    {
-      "id": 24
-    },
-    {
-      "id": 25
-    },
-    {
-      "id": 26
-    },
-    {
-      "id": 27
-    },
-    {
-      "id": 28
-    },
-    {
-      "id": 29
-    },
-    {
-      "id": 30
-    },
-    {
-      "id": 31
-    },
-    {
-      "username": "testname",
-      "firstName": "test",
+      "username": "mitch",
+      "firstName": "mitch",
       "lastName": "test",
-      "githubName": "BranceA",
+      "githubname": "MitchellArnold",
       "password": "test",
-      "id": 32
-    },
-    {
-      "username": "moretest",
-      "firstName": "moretest",
-      "lastName": "moretest",
-      "githubName": "BranceA",
-      "password": "moretest",
-      "id": 33
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch",
+        "brunch",
+        "oldyaeler"
+      ],
+      "id": 10
     }
   ]
 }
