@@ -54,8 +54,16 @@ const printFriendsToPage = (user) => {
                 clickedUser = person;
             }
         })
+        //JOHN!!!!!!! This is manipulating the page when you click on a follower. If you need to change the DOM do it under these functions.
         console.log(clickedUser);
+        printFriendsToPage(clickedUser);
+        displayComments(clickedUser);
+        displayLanguages(clickedUser.githubname);
+        displayLanguagesBadge(clickedUser);
+        displayProfile(clickedUser.githubname);
+        displayLoggedInUser(clickedUser);
 
+        //JOHN!!!!!!! Don't add anything else beyond this point.
     })
 
 };
@@ -76,7 +84,7 @@ const displayComments = (user) => {
         html += `</div>`;
     }
     // Print (comments) html to page
-    $("#comments").append(html);
+    $("#comments").html(html);
 };
 
 //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
@@ -98,6 +106,8 @@ fetch("/users").then(data => data.json()).then(data => {
     printFriendsToPage(loggedInUserObject);
 
     displayComments(loggedInUserObject);
+
+    displayLoggedInUser(loggedInUserObject);
 
 }).then(function () {
     // Display stuff after fetch is done
@@ -122,7 +132,7 @@ const displayProfile = someUsername => {
                 $("#profile-pic").html(`<img class="profile-pic" src='${profileImage}'>`);
 
                 //Display Username in Heading
-                $("#username-banner").html(`<h1 class="username-banner">${loggedInUserObject.username}</h1>`);
+                //I moved where the banner is generated to displayLoggedInUserFunction
 
                 // Define date of last push
                 const lastCommit = data.filter(data => data.type === "PushEvent")[0].created_at;
@@ -175,6 +185,10 @@ const displayLanguages = someUsername => {
             return response.json();
         })
         .then(data => {
+            console.log(data);
+            $("#repo-links").html(" ");
+            $("#lang-list").html(" ");
+            allLangArrays = [];
             data.forEach(repo => {
                 $("#repo-links").append(`<div class="mx-2"><h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4></div>`);
             });
@@ -229,16 +243,17 @@ const displayLanguagesBadge = (numberOfLanguages) => {
 };
 
 // Creates logged-in user display and signout at top-right corner inside green header bar
-const displayLoggedInUser = () => {
+const displayLoggedInUser = (user) => {
     let html = `<div class="logged-in-user">`;
     html += `<i class="fas fa-user-circle mx-1"></i>`;
     html += `<div class="mx-1">${loggedInUser}</div>`;
     html += `<i class="fas fa-sign-out-alt mx-3" id="logout-icon"></i>`
     html += `</div>`;
     $("#logged-in-user").html(html);
+    $("#username-banner").html(`<h1 class="username-banner">${user.username}</h1>`);
 };
 
-displayLoggedInUser();
+//Moved displayLoggedInUser to call after the fetch on page load. Currently line 110.
 
 $("#logout-icon").on("click", function() {
     // When user logs out, username is cleared from storage so you can't click "Back" and return to a logged-in profile page
