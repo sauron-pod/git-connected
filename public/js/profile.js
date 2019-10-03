@@ -12,6 +12,7 @@ let countMax = 0;
 let users = "";
 let loggedInUserObject;
 let allUsers = [];
+let isUserHome = true;
 
 // Function to print friends to page based off fetched data
 const printFriendsToPage = (user) => {
@@ -37,11 +38,13 @@ const printFriendsToPage = (user) => {
     // Print (friends) html to page
     $("#friend-display").html(html);
     $(".remove-friend").click(function () {
-        let removeName = $(this).attr('id');
-        let index = loggedInUserObject.friends.indexOf(removeName);
-        loggedInUserObject.friends.splice(index, 1);
-        updateFriends(loggedInUserObject);
-        printFriendsToPage(loggedInUserObject);
+        if(isUserHome) {
+            let removeName = $(this).attr('id');
+            let index = loggedInUserObject.friends.indexOf(removeName);
+            loggedInUserObject.friends.splice(index, 1);
+            updateFriends(loggedInUserObject);
+            printFriendsToPage(loggedInUserObject);
+        }
     });
 
     $(".follower-link").click(function (event) {
@@ -62,6 +65,7 @@ const printFriendsToPage = (user) => {
         displayLanguagesBadge(clickedUser);
         displayProfile(clickedUser.githubname);
         displayLoggedInUser(clickedUser);
+        isUserHome = false;
 
         //JOHN!!!!!!! Don't add anything else beyond this point.
     })
@@ -255,8 +259,10 @@ const displayLoggedInUser = (user) => {
 
 //Moved displayLoggedInUser to call after the fetch on page load. Currently line 110.
 
-$("#logout-icon").on("click", function() {
+//Changed click event to target whole div instead of tiny icon. Icon was broke and I think this is better.
+$("#logged-in-user").click(function() {
     // When user logs out, username is cleared from storage so you can't click "Back" and return to a logged-in profile page
+    console.log("test");
     sessionStorage.removeItem("username");
     document.location.href = "index.html";
 });
