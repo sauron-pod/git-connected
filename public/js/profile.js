@@ -291,3 +291,15 @@ function updateFriends(userToAdd) {
         console.log(loggedInUserObject);
     });
 }
+
+// Event listener for "Post a comment" button
+$("#submit-comment").click(function() {
+    let commentContent = $("#message-text").val();
+    let newComment = {
+        "content": commentContent,
+        "author": loggedInUser
+    };
+    loggedInUserObject.comments.push(newComment);
+    updateFriends(loggedInUserObject);
+    displayComments();
+});

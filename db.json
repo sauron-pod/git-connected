@@ -18,6 +18,10 @@
         {
           "content": "Welcome!",
           "author": "GC Staff"
+        },
+        {
+          "content": "test test test",
+          "author": "brunch"
         }
       ],
       "id": 5
@@ -66,6 +70,49 @@
         {
           "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque eaque, laborum mollitia nam natus officia porro ut! Dolor ea eius hic neque. Accusamus aliquid eum illo nam, quibusdam rerum!",
           "author": "YouKnowWho"
+        },
+        {
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "hard-coded test",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "hard-coded test",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "やった！",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "Hi from Beverly",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "Will this submit the comment and also close the modal?",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "I think it works!",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "嬉しいな",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "Can I comment out these lines?",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "howdy",
+          "author": "lemonfreejohn"
+        },
+        {
+          "content": "I'm so happy it works",
+          "author": "lemonfreejohn"
         }
       ],
       "id": 9
