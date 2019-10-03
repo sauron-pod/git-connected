@@ -66,11 +66,23 @@ const printFriendsToPage = (user) => {
         displayProfile(clickedUser.githubname);
         displayLoggedInUser(clickedUser);
         isUserHome = false;
+        $("#go-home-btn").css("display", "inline-block");
 
         //JOHN!!!!!!! Don't add anything else beyond this point.
     })
 
 };
+
+$("#go-home-btn").click(function () {
+    printFriendsToPage(loggedInUserObject);
+    displayComments(loggedInUserObject);
+    displayLanguages(loggedInUserObject.githubname);
+    displayLanguagesBadge(loggedInUserObject);
+    displayProfile(loggedInUserObject.githubname);
+    displayLoggedInUser(loggedInUserObject);
+    isUserHome = true;
+    $("#go-home-btn").css("display", "none");
+});
 
 // Populates "Comments" section with the strings stored in the user's "Comments" property on the database
 const displayComments = (user) => {
