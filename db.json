@@ -345,6 +345,21 @@
         "brunch"
       ],
       "id": 45
+    },
+    {
+      "username": "thedude",
+      "firstName": "The",
+      "lastName": "Dude",
+      "githubname": "brancea",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [],
+      "id": 46
     }
   ]
 }

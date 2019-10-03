@@ -66,7 +66,7 @@ $("#submit-signup").click(function () {
                             "content": "Welcome!",
                             "author": "GC Staff"
                         }];
-                    newUser.friends = ["brunch"];
+                    newUser.friends = [];
                     signOnUp(newUser);
 
                     return newUser;
