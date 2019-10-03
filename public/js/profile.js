@@ -328,3 +328,24 @@ function updateFriends(userToAdd) {
         console.log(loggedInUserObject);
     });
 }
+
+$("#find-btn").click(function () {
+    let searchInput = $("#search-input").val();
+    let confirmedUser = "";
+    $("#search-input").val("");
+
+    allUsers.forEach(person => {
+        console.log(person.id);
+        if(person.username === searchInput){
+            confirmedUser = person;
+        }
+    });
+    console.log(confirmedUser);
+    printFriendsToPage(confirmedUser);
+    displayComments(confirmedUser);
+    displayLanguages(confirmedUser.githubname);
+    displayProfile(confirmedUser.githubname);
+    displayLoggedInUser(confirmedUser);
+    isUserHome = false;
+    $("#go-home-btn").css("display", "inline-block");
+});
