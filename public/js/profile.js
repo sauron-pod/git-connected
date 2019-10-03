@@ -62,7 +62,6 @@ const printFriendsToPage = (user) => {
         printFriendsToPage(clickedUser);
         displayComments(clickedUser);
         displayLanguages(clickedUser.githubname);
-        displayLanguagesBadge(clickedUser);
         displayProfile(clickedUser.githubname);
         displayLoggedInUser(clickedUser);
         isUserHome = false;
@@ -77,7 +76,6 @@ $("#go-home-btn").click(function () {
     printFriendsToPage(loggedInUserObject);
     displayComments(loggedInUserObject);
     displayLanguages(loggedInUserObject.githubname);
-    displayLanguagesBadge(loggedInUserObject);
     displayProfile(loggedInUserObject.githubname);
     displayLoggedInUser(loggedInUserObject);
     isUserHome = true;
