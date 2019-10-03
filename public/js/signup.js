@@ -64,6 +64,7 @@ $("#submit-signup").click(function () {
                             "content": "Welcome!",
                             "author": "GC Staff"
                         }];
+                    newUser.friends = [];
 
                     return newUser;
                 } else {

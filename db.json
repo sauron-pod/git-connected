@@ -160,6 +160,20 @@
       "githubName": "BranceA",
       "password": "moretest",
       "id": 33
+    },
+    {
+      "username": "commenttest",
+      "firstName": "comment",
+      "lastName": "test",
+      "githubName": "BranceA",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "id": 34
     }
   ]
 }
