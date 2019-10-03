@@ -329,6 +329,18 @@ function updateFriends(userToAdd) {
     });
 }
 
+// Event listener for "Post a comment" button
+$("#submit-comment").click(function() {
+    let commentContent = $("#message-text").val();
+    let newComment = {
+        "content": commentContent,
+        "author": loggedInUser
+    };
+    loggedInUserObject.comments.push(newComment);
+    updateFriends(loggedInUserObject);
+    displayComments();
+});
+
 $("#find-btn").click(function () {
     let searchInput = $("#search-input").val().toLowerCase().trim();
     let confirmedUser = "";
