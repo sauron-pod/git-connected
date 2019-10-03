@@ -19,7 +19,7 @@ const printFriendsToPage = (user) => {
     let html = "";
     temp.forEach(d => {
         allUsers.forEach(e => {
-            if (e.username == d) {
+            if (e.username == d.username) {
                 html += `<div id="friend-bar" class="content-bar">`;
                 html += `<div class="mx-2">`;
                 html += `<img class="content-pic my-2" src='${e.githubavatar}'>`;
@@ -29,12 +29,17 @@ const printFriendsToPage = (user) => {
                 html += `<a href="http://github.com/${e.githubname}">${e.username}</a>`;
                 html += `</h4>`;
                 html += `</div>`;
+                html += `<p class="remove-friend" id="${e.id}">X</p>`;
                 html += `</div>`;
             };
         });
     });
     // Print (friends) html to page
-    $("#friend-display").append(html);
+    $("#friend-display").html(html);
+    // Need to turn friends into objects before I do this
+    // $(".remove-friend").click(function () {
+    //     let
+    // })
 };
 
 // Populates "Comments" section with the strings stored in the user's "Comments" property on the database
@@ -249,13 +254,13 @@ $("#add-follower").click(function () {
             return response.json().then(response => {
                 response.forEach(user => {
                     if (user.username === newFollower) {
-                        loggedInUserObject.friends.push(newFollower);
+                        loggedInUserObject.friends.push(user);
                         updateFriends(loggedInUserObject);
                     }
                 })
             });
         }).then(() => {
-
+            printFriendsToPage(loggedInUserObject);
         })
     }else {
         alert("You are already following that user.")

@@ -69,6 +69,72 @@
         }
       ],
       "id": 9
+    },
+    {
+      "username": "mitch",
+      "firstName": "Mitch",
+      "lastName": "Test",
+      "githubname": "MitchellArnold",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        {
+          "username": "brunch",
+          "name": "Brance",
+          "password": "abc123",
+          "githubname": "BranceA",
+          "githubavatar": "https://avatars3.githubusercontent.com/u/52936564?v=4",
+          "location": "Austin, TX",
+          "favoriteColor": "Crimson Red",
+          "friends": [
+            "oldyaeler",
+            "lemonfreejohn",
+            "brunch",
+            "testname"
+          ],
+          "comments": [
+            {
+              "content": "Welcome!",
+              "author": "GC Staff"
+            }
+          ],
+          "id": 5
+        },
+        {
+          "username": "lemonfreejohn",
+          "name": "John",
+          "password": "ghi789",
+          "githubname": "cadenajohn85",
+          "githubavatar": "https://avatars3.githubusercontent.com/u/52936479?v=4",
+          "location": "Dallas, TX",
+          "favoriteColor": "Purple",
+          "friends": [
+            "brunch",
+            "oldyaeler"
+          ],
+          "comments": [
+            {
+              "content": "Welcome!",
+              "author": "GC Staff"
+            },
+            {
+              "content": "こんにちは",
+              "author": "例のあの人"
+            },
+            {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque eaque, laborum mollitia nam natus officia porro ut! Dolor ea eius hic neque. Accusamus aliquid eum illo nam, quibusdam rerum!",
+              "author": "YouKnowWho"
+            }
+          ],
+          "id": 9
+        }
+      ],
+      "id": 10
     }
   ]
 }
