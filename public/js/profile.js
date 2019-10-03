@@ -10,12 +10,56 @@ let allLangArrays = [];
 let count = 0;
 let countMax = 0;
 let users = "";
-let followerArray = [];
 let loggedInUserObject;
+let allUsers = [];
+
+// Function to print friends to page based off fetched data
+const printFriendsToPage = (user) => {
+    let temp = user.friends;
+    let html = "";
+    temp.forEach(d => {
+        allUsers.forEach(e => {
+            if (e.username == d) {
+                html += `<div id="friend-bar" class="content-bar">`;
+                html += `<div class="mx-2">`;
+                html += `<img class="content-pic my-2" src='${e.githubavatar}'>`;
+                html += `</div>`;
+                html += `<div class="mx-2">`;
+                html += `<h4>`;
+                html += `<a href="http://github.com/${e.githubname}">${e.username}</a>`;
+                html += `</h4>`;
+                html += `</div>`;
+                html += `</div>`;
+            };
+        });
+    });
+    // Print (friends) html to page
+    $("#friend-display").append(html);
+};
+
+// Populates "Comments" section with the strings stored in the user's "Comments" property on the database
+const displayComments = (user) => {
+    let comments = user.comments;
+    let html = "";
+    // Loop backwards through comments in order to display most recent comment at top
+    for (let i = comments.length - 1; i >= 0; --i) {
+        html += `<div class="content-areas mx-2 my-2 d-flex justify-content-between">`;
+        html += `<div class="mx-2 my-2">`;
+        html += comments[i].content;
+        html += `</div>`;
+        html += `<div class="mx-2 my-2 content-bar">`;
+        html += `by ${comments[i].author}`;
+        html += `</div>`;
+        html += `</div>`;
+    }
+    // Print (comments) html to page
+    $("#comments").append(html);
+};
 
 //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
 fetch("/users").then(data => data.json()).then(data => {
     users = data;
+    allUsers = data;
     let currentUserIdx = 0;
     (verbose) ? console.log(users) : "";
     users.forEach((u, i) => {
@@ -28,50 +72,9 @@ fetch("/users").then(data => data.json()).then(data => {
         }
     });
 
-    // Function to print friends to page based off fetched data
-    const printFriendsToPage = () => {
-        let temp = users[currentUserIdx].friends;
-        let html = "";
-        temp.forEach(d => {
-            users.forEach(e => {
-                if (e.username == d) {
-                    html += `<div id="friend-bar" class="content-bar">`;
-                    html += `<div class="mx-2">`;
-                    html += `<img class="content-pic my-2" src='${e.githubavatar}'>`;
-                    html += `</div>`;
-                    html += `<div class="mx-2">`;
-                    html += `<h4>`;
-                    html += `<a href="http://github.com/${e.githubname}">${e.username}</a>`;
-                    html += `</h4>`;
-                    html += `</div>`;
-                    html += `</div>`;
-                };
-            });
-        });
-        // Print (friends) html to page
-        $("#friend-display").append(html);
-    };
-    printFriendsToPage();
+    printFriendsToPage(loggedInUserObject);
 
-    // Populates "Comments" section with the strings stored in the user's "Comments" property on the database
-    const displayComments = () => {
-        let comments = users[currentUserIdx].comments;
-        let html = "";
-        // Loop backwards through comments in order to display most recent comment at top
-        for (let i = comments.length - 1; i >= 0; --i) {
-            html += `<div class="content-areas mx-2 my-2 d-flex justify-content-between">`;
-            html += `<div class="mx-2 my-2">`;
-            html += comments[i].content;
-            html += `</div>`;
-            html += `<div class="mx-2 my-2 content-bar">`;
-            html += `by ${comments[i].author}`;
-            html += `</div>`;
-            html += `</div>`;
-        }
-        // Print (comments) html to page
-        $("#comments").append(html);
-    };
-    displayComments();
+    displayComments(loggedInUserObject);
 
 }).then(function () {
     // Display stuff after fetch is done
