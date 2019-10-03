@@ -349,3 +349,15 @@ $("#find-btn").click(function () {
     isUserHome = false;
     $("#go-home-btn").css("display", "inline-block");
 });
+
+const searchInput = document.getElementById("search-input");
+const findBtn = document.getElementById("find-btn");
+
+console.log(searchInput);
+
+searchInput.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        findBtn.click();
+    }
+});
