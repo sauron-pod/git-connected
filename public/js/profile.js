@@ -26,7 +26,7 @@ const printFriendsToPage = (user) => {
                 html += `</div>`;
                 html += `<div class="mx-2">`;
                 html += `<h4>`;
-                html += `<a href="http://github.com/${e.githubname}" class="${e.username}" id="follower-link">${e.username}</a>`;
+                html += `<a href="http://github.com/${e.githubname}" id="${e.id}" class="follower-link">${e.username}</a>`;
                 html += `</h4>`;
                 html += `</div>`;
                 html += `<p class="remove-friend" id="${e.username}">X</p>`;
@@ -44,12 +44,19 @@ const printFriendsToPage = (user) => {
         printFriendsToPage(loggedInUserObject);
     });
 
-    // $("#follower-link").click(function (event) {
-    //     event.preventDefault();
-    //     let clickedId = $(this).attr('class');
-    //     console.log(clickedId);
-    //
-    // })
+    $(".follower-link").click(function (event) {
+        event.preventDefault();
+        let clickedId = $(this).attr('id');
+        let clickedUser = {};
+        allUsers.forEach(person => {
+            console.log(person.id);
+            if(person.id == clickedId){
+                clickedUser = person;
+            }
+        })
+        console.log(clickedUser);
+
+    })
 
 };
 
