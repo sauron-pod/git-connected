@@ -18,7 +18,7 @@ function signOnUp(userToAdd) {
         body: JSON.stringify(userToAdd),
     };
     fetch("http://localhost:3000/users", options).then(() => {
-        document.location.href = "index.html";
+        // document.location.href = "index.html";
         console.log("We did it boys");
     });
 }
@@ -36,6 +36,7 @@ $("#submit-signup").click(function () {
             console.log(user.username);
             if (user.username === $("#username-input").val()){
                 console.log("we made it here");
+                nameIsNew = false;
                 return Promise.reject("Username already taken.");
             };
         })
@@ -43,11 +44,12 @@ $("#submit-signup").click(function () {
         console.log(err);
     }).catch(err => {
         console.log(err);
+        nameIsNew = false;
         return Promise.reject("Username already taken.");
     }).then(()=>{ fetch(`https://api.github.com/users/${githubName}`, {headers: {'Authorization': `token ${gitHubKey}`}}).then(function (response) {
         return response.json().then(response => {
             console.log(response);
-            if (response.id !== undefined) {
+            if (response.message !== "Not Found" && nameIsNew) {
                 if ($("#password-input-one").val() === $("#password-input-two").val()) {
                     newUser.username = $("#username-input").val();
                     $("#username-input").val("");
@@ -64,7 +66,8 @@ $("#submit-signup").click(function () {
                             "content": "Welcome!",
                             "author": "GC Staff"
                         }];
-                    newUser.friends = [];
+                    newUser.friends = ["brunch"];
+                    signOnUp(newUser);
 
                     return newUser;
                 } else {
@@ -76,14 +79,15 @@ $("#submit-signup").click(function () {
                     $("#last-name").val("");
                     alert("Passwords do not match");
                 }
-            } else if(response.message === "Not Found"){
+            } else if(nameIsNew === false){
                 $("#password-input-one").val("");
                 $("#password-input-two").val("");
                 $("#username-input").val("");
                 $("#github-name-input").val("");
                 $("#first-name").val("");
                 $("#last-name").val("");
-                alert("Username already taken")
+                alert("Username already taken");
+                nameIsNew = false;
             } else if (response.id === undefined){
                 $("#password-input-one").val("");
                 $("#password-input-two").val("");
@@ -93,8 +97,6 @@ $("#submit-signup").click(function () {
                 $("#last-name").val("");
                 alert("Please enter your Github username");
             }
-        }).then(newUser => {
-            signOnUp(newUser);
         })
     })
     })

@@ -174,6 +174,126 @@
         }
       ],
       "id": 34
+    },
+    {
+      "username": "friendstest",
+      "firstName": "friend",
+      "lastName": "test",
+      "githubName": "BranceA",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [],
+      "id": 35
+    },
+    {
+      "username": "friendstest",
+      "firstName": "friend",
+      "lastName": "test",
+      "githubName": "BranceA",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 36
+    },
+    {
+      "username": "friendstest",
+      "firstName": "friends",
+      "lastName": "test",
+      "githubName": "test",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 37
+    },
+    {
+      "username": "friendstest",
+      "firstName": "friends",
+      "lastName": "test",
+      "githubName": "BranceA",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 38
+    },
+    {
+      "username": "brunch",
+      "firstName": "Brance",
+      "lastName": "Test",
+      "githubName": "BranceA",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 39
+    },
+    {
+      "username": "brunch",
+      "firstName": "Brance",
+      "lastName": "test",
+      "githubName": "Basd",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 40
+    },
+    {
+      "id": 41
+    },
+    {
+      "username": "brunch",
+      "firstName": "different",
+      "lastName": "test",
+      "githubName": "Brance",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch"
+      ],
+      "id": 42
     }
   ]
 }
