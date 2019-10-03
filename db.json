@@ -69,6 +69,25 @@
         }
       ],
       "id": 9
+    },
+    {
+      "username": "mitch",
+      "firstName": "mitch",
+      "lastName": "test",
+      "githubname": "MitchellArnold",
+      "password": "test",
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
+      "friends": [
+        "brunch",
+        "brunch",
+        "oldyaeler"
+      ],
+      "id": 10
     }
   ]
 }

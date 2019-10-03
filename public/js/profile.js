@@ -104,7 +104,7 @@ const displayProfile = someUsername => {
                 $("#profile-pic").html(`<img class="profile-pic" src='${profileImage}'>`);
 
                 //Display Username in Heading
-                $("#username-banner").html(`<h1 class="username-banner">${someUsername}</h1>`);
+                $("#username-banner").html(`<h1 class="username-banner">${loggedInUserObject.username}</h1>`);
 
                 // Define date of last push
                 const lastCommit = data.filter(data => data.type === "PushEvent")[0].created_at;
@@ -245,7 +245,7 @@ $("#add-follower").click(function () {
     let newFollower = $("#github-follower").val();
     $("#github-follower").val("");
     for(let i = 0; i < loggedInUserObject.friends.length; i++){
-        if(loggedInUserObject.friends[i].username === newFollower){
+        if(loggedInUserObject.friends[i] === newFollower){
             isNewFollowerNew = false;
         }
     }
