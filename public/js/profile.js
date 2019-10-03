@@ -50,8 +50,29 @@ fetch("/users").then(data => data.json()).then(data => {
         });
         // Print (friends) html to page
         $("#friend-display").append(html);
-    }
+    };
     printFriendsToPage();
+
+    // Populates "Comments" section with the strings stored in the user's "Comments" property on the database
+    const displayComments = () => {
+        let comments = users[currentUserIdx].comments;
+        let html = "";
+        // Loop backwards through comments in order to display most recent comment at top
+        for (let i = comments.length - 1; i >= 0; --i) {
+            html += `<div class="content-areas mx-2 my-2 d-flex justify-content-between">`;
+            html += `<div class="mx-2 my-2">`;
+            html += comments[i].content;
+            html += `</div>`;
+            html += `<div class="mx-2 my-2 content-bar">`;
+            html += `by ${comments[i].author}`;
+            html += `</div>`;
+            html += `</div>`;
+        }
+        // Print (comments) html to page
+        $("#comments").append(html);
+    };
+    displayComments();
+
 }).then(function () {
     // Display stuff after fetch is done
     displayProfile(githubUsername);
@@ -63,7 +84,7 @@ fetch("/users").then(data => data.json()).then(data => {
 // Save profile image url to save to database
 
 const displayProfile = someUsername => {
-    fetch(`https://api.github.com/users/${someUsername}/events/public`, { 
+    fetch(`https://api.github.com/users/${someUsername}/events/public`, {
         headers: { 'Authorization': `token ${gitHubKey}` }}).then(response => response.json()).then(data => {
             if (data[0] === undefined) {
                 $("#profile-pic").css("display", "none");

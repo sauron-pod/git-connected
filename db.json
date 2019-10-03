@@ -14,6 +14,12 @@
         "brunch",
         "testname"
       ],
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
       "id": 5
     },
     {
@@ -28,6 +34,12 @@
         "brunch",
         "lemonfreejohn"
       ],
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        }
+      ],
       "id": 8
     },
     {
@@ -41,6 +53,20 @@
       "friends": [
         "brunch",
         "oldyaeler"
+      ],
+      "comments": [
+        {
+          "content": "Welcome!",
+          "author": "GC Staff"
+        },
+        {
+          "content": "こんにちは",
+          "author": "例のあの人"
+        },
+        {
+          "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque eaque, laborum mollitia nam natus officia porro ut! Dolor ea eius hic neque. Accusamus aliquid eum illo nam, quibusdam rerum!",
+          "author": "YouKnowWho"
+        }
       ],
       "id": 9
     },
