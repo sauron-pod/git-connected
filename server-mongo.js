@@ -18,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.get('/users', router);
 app.post('/users', router);
+app.put('/users', router);
+app.delete('/users', router);
 
 // app.use('/users', (req, res) => res.sendStatus(418));
 
