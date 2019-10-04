@@ -19,7 +19,7 @@ router.post('/users', async (req, res) => {
       username: req.body.username,
       password: req.body.password,
       name: req.body.name,
-      githubname: req.body.githubName,
+      githubname: req.body.githubname,
       friends: [],
       location: "San Antonio, Texas"
     })
