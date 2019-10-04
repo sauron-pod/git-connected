@@ -12,14 +12,13 @@ router.get('/users', async (req, res) => {
   }
 });
 
-router.post('/users', (req, res) => {
+router.post('/users', async (req, res) => {
   try {
     console.log(req.body);
-    let newUser = new usersCollection({
+    let newUser = await new usersCollection({
       username: req.body.username,
       password: req.body.password,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      name: req.body.name,
       githubname: req.body.githubName,
       friends: [],
       location: "San Antonio, Texas"

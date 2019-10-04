@@ -1,11 +1,12 @@
 const express = require('express');
 const path = require('path');
+const router = require('./routes/api/users');
 
 const mongoose = require('mongoose');
 const config = require('./config/config');
 const bodyParser = require('body-parser');
 
-// Init express 
+// Init express
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,7 +16,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Static endpoint handlers
 app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/users/', require('./routes/api/users'));
+app.get('/users', router);
+app.post('/users', router);
+
+// app.use('/users', (req, res) => res.sendStatus(418));
 
 // Connect to mongo DB
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
