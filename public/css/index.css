@@ -7,3 +7,38 @@
   width: 100vw;
   height: 100vh;
 }
+
+h1 {
+  text-align: center;
+  color: #4A7526;
+}
+
+.content-areas {
+  border: solid #4A7526 3px;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.content-heading {
+  background: #6AA833;
+  color: #E8E8E8;
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  width: 250px;
+  border-radius: 5px;
+}
+
+button {
+  border-radius: 5px;
+}
+.teal-bg {
+  background: teal;
+}
