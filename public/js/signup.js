@@ -18,13 +18,25 @@ function signOnUp(userToAdd) {
         body: JSON.stringify(userToAdd),
     };
     fetch("http://localhost:3000/users", options).then(() => {
-        document.location.href = "index.html";
+        // document.location.href = "index.html";
         console.log("We did it boys");
     });
 }
 
 // Eventlistener for signup button
 $("#submit-signup").click(function () {
+    if(
+        $("#password-input-one").val().length === 0 ||
+        $("#password-input-two").val().length === 0 ||
+        $("#username-input").val().length === 0 ||
+        $("#first-name").val().length === 0 ||
+        $("#last-name").val().length === 0 ||
+        $("#github-name-input").val().length === 0
+
+    ){
+        alert("Please fill out all fields.");
+        return;
+    }
 
     let githubName = $("#github-name-input").val();
 
@@ -67,6 +79,7 @@ $("#submit-signup").click(function () {
                             "author": "GC Staff"
                         }];
                     newUser.friends = [];
+                    newUser.githubavatar = response.avatar_url;
                     signOnUp(newUser);
 
                     return newUser;
