@@ -74,3 +74,10 @@ header {
     display: flex;
 }
 
+.post-comments {
+    border-radius: 5px;
+    margin: auto;
+}
+
+
+
