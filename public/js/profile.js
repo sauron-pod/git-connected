@@ -3,7 +3,7 @@ const profilePage = () => {
     //This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
     fetch("/users").then(data => data.json()).then(data => {
         // Verbose mode
-        let verbose = true;
+        let verbose = false;
 
         let loggedInUser = sessionStorage.getItem("username");
         let githubUsername = "";
@@ -20,7 +20,6 @@ const profilePage = () => {
         users.forEach((u, i) => {
             if (u.username == loggedInUser) {
                 loggedInUserObject = u;
-                console.log(loggedInUserObject);
                 githubUsername = u.githubname;
                 (verbose) ? console.log("ghusername is " + githubUsername) : "";
             }
@@ -33,7 +32,6 @@ const profilePage = () => {
         let html = "";
         temp.forEach(d => {
             allUsers.forEach(e => {
-                console.log("friends html is ===============================" + e.username);
                 if (e.username == d) {
                     html += `<div id="friend-bar" class="content-bar">`;
                     html += `<div class="mx-2">`;
@@ -41,7 +39,7 @@ const profilePage = () => {
                     html += `</div>`;
                     html += `<div class="mx-2">`;
                     html += `<h4>`;
-                    html += `<a href="http://github.com/${e.githubname}" id="${e.id}" class="follower-link">${e.username}</a>`;
+                    html += `<a href="http://github.com/${e.githubname}" id="${e._id}" class="follower-link">${e.username}</a>`;
                     html += `</h4>`;
                     html += `</div>`;
                     html += `<p class="remove-friend" id="${e.username}">X</p>`;
@@ -53,6 +51,7 @@ const profilePage = () => {
         // Print (friends) html to page
         $("#friend-display").html(html);
         $(".remove-friend").click(function () {
+            console.log("X was clicked");
             if(isUserHome) {
                 let removeName = $(this).attr('id');
                 let index = loggedInUserObject.friends.indexOf(removeName);
@@ -67,11 +66,12 @@ const profilePage = () => {
             let clickedId = $(this).attr('id');
             let clickedUser = {};
             allUsers.forEach(person => {
-                console.log(person.id);
-                if(person.id == clickedId){
+                // console.log(person._id);
+                if(person._id == clickedId){
                     clickedUser = person;
                 }
             })
+
             //This is manipulating the page when you click on a follower. If you need to change the DOM do it under these functions.
             console.log(clickedUser);
             printFriendsToPage(clickedUser);
@@ -189,7 +189,6 @@ const profilePage = () => {
                 return response.json();
             })
             .then(data => {
-                console.log(data);
                 $("#repo-links").html(" ");
                 $("#lang-list").html(" ");
                 allLangArrays = [];
@@ -340,7 +339,7 @@ const profilePage = () => {
                 confirmedUser = person;
             }
         });
-        console.log(confirmedUser);
+        console.log("confirmed user is " + confirmedUser);
         printFriendsToPage(confirmedUser);
         displayComments(confirmedUser);
         displayLanguages(confirmedUser.githubname);
@@ -351,8 +350,6 @@ const profilePage = () => {
 
     const searchInput = document.getElementById("search-input");
     const findBtn = document.getElementById("find-btn");
-
-    console.log(searchInput);
 
     searchInput.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
@@ -372,8 +369,6 @@ const profilePage = () => {
 
     // displayRepos(githubUsername);
     displayLanguages(githubUsername);
-
-    console.log("loggedInUserObject.id is : " + loggedInUserObject._id);
     });
 };
 
