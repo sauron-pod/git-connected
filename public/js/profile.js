@@ -319,7 +319,7 @@ function updateFriends(userToAdd) {
         },
         body: JSON.stringify(userToAdd),
     };
-    fetch(`http://localhost:3000/users/${loggedInUserObject.id}`, options).then(() => {
+    fetch(`users/${loggedInUserObject.id}`, options).then(() => {
         console.log("We did it boys");
         console.log(loggedInUserObject);
     });

@@ -5,7 +5,6 @@ const usersCollection = require('../../models/users');
 router.get('/users', async (req, res) => {
   try {
     let data = await usersCollection.find();
-    console.log(data);
     res.json(data);
   } catch (err) {
     console.error(err.message);
@@ -54,7 +53,7 @@ router.get('/users/:id', async (req, res) => {
   },
   comments: {
     type: Array
-  }, 
+  },
   friends: {
     type: Array
   }
@@ -85,16 +84,10 @@ router.post('/users', async (req, res) => {
 // Put is used for comments
 router.put('/users/:_id', async (req, res) => {
   try {
-    id = req.params.id;
-    let user = await usersCollection.findById(req.params.id);
-    user.content = req.body.content;
-    user.author = req.body.author;
-    
-    console.log(user);
-    await user.save();
+    id = req.params._id;
+    let user = await usersCollection.findOneAndUpdate({ _id: id }, req.body);
+    res.sendStatus(200);
 
-    res.json(user);
-    
   } catch (err) {
     console.error(err.message);
     res.sendStatus(500).json({msg: "Unable to find user: " + id});
@@ -103,9 +96,12 @@ router.put('/users/:_id', async (req, res) => {
 
 router.delete('/users/:_id', async (req, res) => {
   try {
-    console.log("id to delete is: " + _id);
+    let id = req.params._id;
+    console.log("id to delete is: " + id);
+    let user = await usersCollection.findOneAndRemove({ _id: id });
+    res.sendStatus(204);
   } catch (err) {
-    console.error(error.message);
+    console.error(err.message);
     res.status(500).json({msg: "Unable to DELETE"});
   }
 })

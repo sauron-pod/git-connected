@@ -15,7 +15,7 @@ $("#login-button").click(function () {
     $("#password").val("");
 
     //This fetches from our database and checks if the username matches the password
-    fetch("http://localhost:3000/users", {
+    fetch("/users", {
         method: 'GET',
         headers: {
             'content-type': 'application/json'

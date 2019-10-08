@@ -16,17 +16,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Static endpoint handlers
 app.use('/', express.static(path.join(__dirname, 'public')));
-app.get('/users', router);
-app.get('/users/:id', router);
+app.get('/users', router); // Get all accounts
+app.get('/users/:id', router); // Get account
+app.post('/users', router); // Create account
+app.delete('/users/:id', router); // Delete accounts
 
-app.post('/users', router);
-app.put('/users', router); // Put for comments
-app.delete('/users', router);
+app.put('/users/:id', router); // Put for comments
 
 // app.use('/users', (req, res) => res.sendStatus(418));
 
 // Connect to mongo DB
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const db = mongoose.connection;
 
