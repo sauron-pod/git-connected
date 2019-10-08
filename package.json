@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server-mongo.js",
-    "server": "json-server db.json",
-    "dev": "json-server db.json",
+    "json-server": "json-server db.json",
+    "dev": "nodemon server-mongo.js",
     "dev:do-not-use": "concurrently 'node server-json.js' 'json-server db.json'"
   },
   "repository": {
