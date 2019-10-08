@@ -57,7 +57,7 @@ const printFriendsToPage = (user) => {
                 clickedUser = person;
             }
         })
-        //JOHN!!!!!!! This is manipulating the page when you click on a follower. If you need to change the DOM do it under these functions.
+        //This is manipulating the page when you click on a follower. If you need to change the DOM do it under these functions.
         console.log(clickedUser);
         printFriendsToPage(clickedUser);
         displayComments(clickedUser);
@@ -65,21 +65,19 @@ const printFriendsToPage = (user) => {
         displayProfile(clickedUser.githubname);
         displayLoggedInUser(clickedUser);
         isUserHome = false;
-        $("#go-home-btn").css("display", "inline-block");
 
-        //JOHN!!!!!!! Don't add anything else beyond this point.
+        //Don't add anything else beyond this point.
     })
 
 };
 
-$("#go-home-btn").click(function () {
+$(document).on('click', '.return-to-profile', function () {
     printFriendsToPage(loggedInUserObject);
     displayComments(loggedInUserObject);
     displayLanguages(loggedInUserObject.githubname);
     displayProfile(loggedInUserObject.githubname);
     displayLoggedInUser(loggedInUserObject);
     isUserHome = true;
-    $("#go-home-btn").css("display", "none");
 });
 
 // Populates "Comments" section with the strings stored in the user's "Comments" property on the database
@@ -232,8 +230,6 @@ const displayLanguages = someUsername => {
         });
 };
 
-// not sure what this is
-
 const displayLanguagesBadge = (numberOfLanguages) => {
     let badgeImage = "";
     let badgeAltText = "";
@@ -259,8 +255,8 @@ const displayLanguagesBadge = (numberOfLanguages) => {
 // Creates logged-in user display and signout at top-right corner inside green header bar
 const displayLoggedInUser = (user) => {
     let html = `<div class="logged-in-user">`;
-    html += `<i class="fas fa-user-circle mx-1"></i>`;
-    html += `<div class="mx-1">${loggedInUser}</div>`;
+    html += `<i class="fas fa-user-circle mx-1 return-to-profile"></i>`;
+    html += `<div class="mx-1 return-to-profile">${loggedInUser}</div>`;
     html += `<i class="fas fa-sign-out-alt mx-3" id="logout-icon"></i>`;
     html += `</div>`;
     $("#logged-in-user").html(html);
@@ -359,7 +355,6 @@ $("#find-btn").click(function () {
     displayProfile(confirmedUser.githubname);
     displayLoggedInUser(confirmedUser);
     isUserHome = false;
-    $("#go-home-btn").css("display", "inline-block");
 });
 
 const searchInput = document.getElementById("search-input");
