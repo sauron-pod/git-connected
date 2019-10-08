@@ -1,25 +1,46 @@
-// Verbose mode
-let verbose = true;
+const profilePage = () => {
+
+//This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
+fetch("/users").then(data => data.json()).then(data => {
+    // Verbose mode
+    let verbose = true;
+
+    let loggedInUser = sessionStorage.getItem("username");
+    let githubUsername = "";
+    let ghDataLoggedInUser = [];
+
+    let allLangArrays = [];
+    let count = 0;
+    let countMax = 0;
+    let users = data;
+    let loggedInUserObject;
+    let allUsers = data;
+    let isUserHome = true;
+
+    (verbose) ? console.log(users) : "";
+    users.forEach((u, i) => {
+        if (u.username == loggedInUser) {
+            loggedInUserObject = u;
+            console.log(loggedInUserObject);
+            githubUsername = u.githubname;
+            (verbose) ? console.log("ghusername is " + githubUsername) : "";
+        }
+    });
+
+
+
 
 //Assign username from session storage.
-let loggedInUser = sessionStorage.getItem("username");
-let githubUsername = "";
-let ghDataLoggedInUser = [];
-
-let allLangArrays = [];
-let count = 0;
-let countMax = 0;
-let users = "";
-let loggedInUserObject;
-let allUsers = [];
-let isUserHome = true;
 
 // Function to print friends to page based off fetched data
 const printFriendsToPage = (user) => {
     let temp = user.friends;
+
+
     let html = "";
     temp.forEach(d => {
         allUsers.forEach(e => {
+            console.log("friends html is ===============================" + e.username);
             if (e.username == d) {
                 html += `<div id="friend-bar" class="content-bar">`;
                 html += `<div class="mx-2">`;
@@ -35,6 +56,8 @@ const printFriendsToPage = (user) => {
             };
         });
     });
+
+
     // Print (friends) html to page
     $("#friend-display").html(html);
     $(".remove-friend").click(function () {
@@ -71,19 +94,26 @@ const printFriendsToPage = (user) => {
 
 };
 
+printFriendsToPage(loggedInUserObject);
+
 $(document).on('click', '.return-to-profile', function () {
     printFriendsToPage(loggedInUserObject);
-    displayComments(loggedInUserObject);
     displayLanguages(loggedInUserObject.githubname);
     displayProfile(loggedInUserObject.githubname);
     displayLoggedInUser(loggedInUserObject);
+    displayComments(loggedInUserObject);
     isUserHome = true;
 });
 
+// $(document).on('click', '.return-to-profile', function () {
+//     displayComments(loggedInUserObject);
+// })
+
 // Populates "Comments" section with the strings stored in the user's "Comments" property on the database
 const displayComments = (user) => {
-    let comments = user.comments;
     let html = "";
+    $("#comments").html(html);
+    let comments = user.comments;
     // Loop backwards through comments in order to display most recent comment at top
     for (let i = comments.length - 1; i >= 0; --i) {
         html += `<div class="content-areas mx-2 my-2 d-flex justify-content-between">`;
@@ -99,35 +129,8 @@ const displayComments = (user) => {
     $("#comments").html(html);
 };
 
-//This fetch cycles through our database and gets the githubname for the logged in user. On fulfill it populates the page with users info.
-fetch("/users").then(data => data.json()).then(data => {
-    users = data;
-    allUsers = data;
-    let currentUserIdx = 0;
-    (verbose) ? console.log(users) : "";
-    users.forEach((u, i) => {
-        if (u.username == loggedInUser) {
-            loggedInUserObject = u;
-            console.log(loggedInUserObject);
-            githubUsername = u.githubname;
-            currentUserIdx = i;
-            (verbose) ? console.log("ghusername is " + githubUsername) : "";
-        }
-    });
 
-    printFriendsToPage(loggedInUserObject);
 
-    displayComments(loggedInUserObject);
-
-    displayLoggedInUser(loggedInUserObject);
-
-}).then(function () {
-    // Display stuff after fetch is done
-    displayProfile(githubUsername);
-
-    // displayRepos(githubUsername);
-    displayLanguages(githubUsername);
-});
 
 // Save profile image url to save to database
 
@@ -319,7 +322,7 @@ function updateFriends(userToAdd) {
         },
         body: JSON.stringify(userToAdd),
     };
-    fetch(`users/${loggedInUserObject.id}`, options).then(() => {
+    fetch(`http://localhost:3000/users/${loggedInUserObject._id}`, options).then(() => {
         console.log("We did it boys");
         console.log(loggedInUserObject);
     });
@@ -334,7 +337,7 @@ $("#submit-comment").click(function() {
     };
     loggedInUserObject.comments.push(newComment);
     updateFriends(loggedInUserObject);
-    displayComments();
+    displayComments(loggedInUserObject);
 });
 
 $("#find-btn").click(function () {
@@ -368,3 +371,42 @@ searchInput.addEventListener("keyup", function(event) {
         findBtn.click();
     }
 });
+
+
+printFriendsToPage(loggedInUserObject);
+
+displayComments(loggedInUserObject);
+
+displayLoggedInUser(loggedInUserObject);
+
+
+
+
+// Display stuff after fetch is done
+displayProfile(githubUsername);
+
+// displayRepos(githubUsername);
+displayLanguages(githubUsername);
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.log("loggedInUserObject.id is : " + loggedInUserObject._id);
+
+
+
+
+
+});
+};
+
+profilePage();
