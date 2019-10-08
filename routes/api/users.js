@@ -69,6 +69,7 @@ router.post('/users', async (req, res) => {
       lastName: req.body.lastName,
       githubname: req.body.githubname,
       password: req.body.password,
+      githubavatar: req.body.githubavatar,
       location: "San Antonio, Texas",
       comments: [],
       friends: [],
