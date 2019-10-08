@@ -25,17 +25,54 @@ router.get('/users/:id', async (req, res) => {
     res.sendStatus(500).json({msg: "Unable to find user: " + id});
   }
 });
-  
+
+/*
+  username: {
+    type: String
+  },
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  githubname: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  githubavatar: {
+    type: String
+  },
+  location: {
+    type: String
+  },
+  comments: {
+    type: Array
+  }, 
+  friends: {
+    type: Array
+  }
+});
+*/
+
 router.post('/users', async (req, res) => {
   try {
     console.log(req.body);
     let newUser = await new usersCollection({
       username: req.body.username,
-      password: req.body.password,
-      name: req.body.name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       githubname: req.body.githubname,
+      password: req.body.password,
+      location: "San Antonio, Texas",
+      comments: [],
       friends: [],
-      location: "San Antonio, Texas"
     })
     const save = newUser.save();
     res.json(save);
@@ -45,13 +82,19 @@ router.post('/users', async (req, res) => {
   }
 });
 
+// Put is used for comments
 router.put('/users/:_id', async (req, res) => {
   try {
     id = req.params.id;
-    let data = await usersCollection.find();
-    let returnUser;
-    returnUser = data.filter((usr) => usr._id == id);
-    res.json(returnUser);
+    let user = await usersCollection.findById(req.params.id);
+    user.content = req.body.content;
+    user.author = req.body.author;
+    
+    console.log(user);
+    await user.save();
+
+    res.json(user);
+    
   } catch (err) {
     console.error(err.message);
     res.sendStatus(500).json({msg: "Unable to find user: " + id});

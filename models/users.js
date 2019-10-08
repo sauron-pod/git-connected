@@ -28,15 +28,19 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String
   },
-  name: {
+  firstName: {
     type: String,
     required: true
   },
-  password: {
+  lastName: {
     type: String,
     required: true
   },
   githubname: {
+    type: String,
+    required: true
+  },
+  password: {
     type: String,
     required: true
   },
@@ -46,6 +50,9 @@ const UserSchema = new mongoose.Schema({
   location: {
     type: String
   },
+  comments: {
+    type: Array
+  }, 
   friends: {
     type: Array
   }
